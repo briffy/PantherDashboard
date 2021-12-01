@@ -1,10 +1,4 @@
 #!/bin/bash
-userdel admin2
-userdel admin
-groupdel admin
-groupdel admin2
-rm -rf /home/admin
-rm -rf /home/admin2
 
 adduser --disabled-password --gecos "" admin
 echo admin:admin | chpasswd
@@ -12,13 +6,11 @@ usermod admin -g sudo
 
 
 if id -nG admin | grep -qw "sudo"; then
-  wget https://raw.githubusercontent.com/briffy/PiscesQoLDashboard/main/latest.tar.gz -O /tmp/latest.tar.gz
+  wget https://raw.githubusercontent.com/briffy/PantherDashboard/main/latest.tar.gz -O /tmp/latest.tar.gz
   cd /tmp
   if test -f latest.tar.gz; then
     tar -xzf latest.tar.gz
     cd dashboardinstall
-    systemctl stop pm2-pi.service
-    systemctl disable pm2-pi.service
     apt-get update
     apt-get --assume-yes install nginx php-fpm php7.3-fpm
 
