@@ -1,14 +1,6 @@
 #!/bin/bash
 sudo apt-get -f install --assume-yes
 
-if ! id "admin" &> /dev/null; then
-  delgroup admin
-  adduser --disabled-password --gecos "" admin
-  echo admin:admin | chpasswd
-  usermod admin -g sudo
-fi
-
-
 if id -nG admin | grep -qw "sudo"; then
   rm -rf /tmp/latest.tar.gz
   rm -rf /tmp/dashboardinstall
