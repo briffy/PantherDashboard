@@ -1,10 +1,5 @@
 #!/bin/bash
 
-adduser --disabled-password --gecos "" admin
-echo admin:admin | chpasswd
-usermod admin -g sudo
-
-
 if id -nG admin | grep -qw "sudo"; then
   wget https://raw.githubusercontent.com/briffy/PantherDashboard/main/latest.tar.gz -O /tmp/latest.tar.gz
   cd /tmp
