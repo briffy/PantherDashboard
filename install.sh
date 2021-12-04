@@ -46,7 +46,9 @@ if id -nG admin | grep -qw "sudo"; then
        systemctl enable $name.timer
        systemctl start $name.service
     done
-
+    
+    systemctl disable lora-pkt-fwd.service
+    
     systemctl start install-dashboard.service
 
     echo 'Success.'
