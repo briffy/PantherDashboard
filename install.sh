@@ -48,7 +48,8 @@ if id -nG admin | grep -qw "sudo"; then
        systemctl enable $name.timer
        systemctl start $name.service
     done
-
+    
+    systemctl enable nginx
     systemctl start nginx
 
     echo 'Success.'
