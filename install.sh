@@ -28,7 +28,7 @@ if id -nG admin | grep -qw "sudo"; then
       openssl dhparam -out /etc/ssl/certs/dhparam.pem 2048 
     fi
     
-    openssl req -new -newkey rsa:2048 -days 365 -nodes -x509 subj "/C=CN/ST=Panther/L=Panther/O=Panther/CN=localhost" -keyout /etc/ssl/private/nginx-selfsigned.key -out /etc/ssl/certs/nginx-selfsigned.crt
+    openssl req -new -newkey rsa:2048 -days 365 -nodes -x509 -subj "/C=CN/ST=Panther/L=Panther/O=Panther/CN=localhost" -keyout /etc/ssl/private/nginx-selfsigned.key -out /etc/ssl/certs/nginx-selfsigned.crt
     
     cp systemd/* /etc/systemd/system/
 
