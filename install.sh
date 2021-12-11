@@ -4,6 +4,8 @@ if id -nG admin | grep -qw "sudo"; then
   wget https://raw.githubusercontent.com/briffy/PantherDashboard/main/latest.tar.gz -O /tmp/latest.tar.gz
   cd /tmp
   if test -f latest.tar.gz; then
+    rm -rf /tmp/dashboardinstall
+    
     tar -xzf latest.tar.gz
     cd dashboardinstall
     apt-get update
@@ -14,14 +16,17 @@ if id -nG admin | grep -qw "sudo"; then
 
     cp -r dashboard/* /var/dashboard/
     cp monitor-scripts/* /etc/monitor-scripts/
-    cp nginx/certs/nginx-selfsigned.crt /etc/ssl/certs/
-    cp nginx/certs/nginx-selfsigned.key /etc/ssl/private/
+       
     cp nginx/snippets/* /etc/nginx/snippets/
     cp nginx/default /etc/nginx/sites-enabled
+    
     if ! test -f /var/dashboard/.htpasswd; then
       cp nginx/.htpasswd /var/dashboard/.htpasswd
     fi
-    cp nginx/dhparam.pem /etc/ssl/certs/dhparam.pem
+    
+    openssl dhparam -out /etc/ssl/certs/dhparam.pem 2048 
+    openssl req -new -newkey rsa:2048 -days 365 -nodes -x509 -keyout /etc/ssl/private/nginx-selfsigned.key -out /etc/ssl/certs/nginx-selfsigned.crt
+    
     cp systemd/* /etc/systemd/system/
 
     chmod 755 /etc/monitor-scripts/*
