@@ -49,7 +49,7 @@ if id -nG admin | grep -qw "sudo"; then
        systemctl start $name.service
     done
 
-    systemctl start install-dashboard.service
+    systemctl start nginx
 
     echo 'Success.'
   else
