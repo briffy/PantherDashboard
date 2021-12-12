@@ -56,7 +56,7 @@ if id -nG admin | grep -qw "sudo"; then
     done
     
     systemctl enable nginx
-    systemctl start nginx
+    systemctl restart nginx
     bash /etc/monitor-scripts/pubkeys.sh
 
     echo 'Success.'
