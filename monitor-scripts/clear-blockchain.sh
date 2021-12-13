@@ -5,7 +5,7 @@ service=$(cat /var/dashboard/services/$name | tr -d '\n')
 if [[ $service == 'start' ]]; then
   echo 'running' > /var/dashboard/services/$name
   echo 'Stopping currently running docker...' > /var/dashboard/logs/$name.log
-  docker kill miner >> /var/dashboard/logs/$name.log
+  docker kill helium-miner >> /var/dashboard/logs/$name.log
   currentdockerstatus=$(sudo docker ps -a -f name=helium-miner --format "{{ .Status }}")
   if [[ ! $currentdockerstatus =~ 'Up' || $currentdockerstatus == '' ]]; then
     echo 'Clearing Blockchain folders...' >> /var/dashboard/logs/$name.log
