@@ -1,4 +1,6 @@
 #!/bin/bash
+rm /tmp/latest.tar.gz
+
 if test -d /var/dashboard; then
   echo 'Dashboard already installed, running an update...'
   wget https://raw.githubusercontent.com/briffy/PiscesQoLDashboard/main/update.sh -O - | sudo bash
