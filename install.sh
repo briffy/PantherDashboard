@@ -1,5 +1,6 @@
 #!/bin/bash
 if test -d /var/dashboard; then
+  echo 'Dashboard already installed, running an update...'
   wget https://raw.githubusercontent.com/briffy/PiscesQoLDashboard/main/update.sh -O - | sudo bash
 else
 
