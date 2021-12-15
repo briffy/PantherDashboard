@@ -1,6 +1,5 @@
 #!/bin/bash
 sudo apt-get -f install --assume-yes
-
 if id -nG admin | grep -qw "sudo"; then
   rm -rf /tmp/latest.tar.gz
   rm -rf /tmp/dashboardinstall
