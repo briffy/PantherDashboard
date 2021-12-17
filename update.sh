@@ -2,14 +2,16 @@
 sudo apt-get -f install --assume-yes
 if id -nG admin | grep -qw "sudo"; then
   rm -rf /tmp/latest.tar.gz
-  rm -rf /tmp/dashboardinstall
+  rm -rf /tmp/PantherDashboard-*
   echo 'Downloading latest release...' > /var/dashboard/logs/dashboard-update.log
-  wget --no-cache https://raw.githubusercontent.com/Panther-X/PantherDashboard/main/latest.tar.gz -O /tmp/latest.tar.gz
+  wget https://raw.githubusercontent.com/Panther-X/PantherDashboard/main/version -O /tmp/dashboard_latest_ver
+  VER=`cat /tmp/dashboard_latest_ver`
+  wget --no-cache https://codeload.github.com/Panther-X/PantherDashboard/tar.gz/refs/tags/${VER} -O /tmp/latest.tar.gz
   cd /tmp
   if test -f latest.tar.gz; then
     echo 'Extracting contents...' >> /var/dashboard/logs/dashboard-update.log
     tar -xzf latest.tar.gz
-    cd dashboardinstall
+    cd PantherDashboard-${VER}
     rm dashboard/logs/dashboard-update.log
     
     for f in dashboard/services/*; do
@@ -37,6 +39,7 @@ if id -nG admin | grep -qw "sudo"; then
     
     cp monitor-scripts/* /etc/monitor-scripts/   
     cp -r dashboard/* /var/dashboard/
+    cp version /var/dashboard/
     cp systemd/* /etc/systemd/system/
     chmod 755 /etc/monitor-scripts/*
     chown root:www-data /var/dashboard/services/*

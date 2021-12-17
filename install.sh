@@ -5,15 +5,16 @@ if test -d /var/dashboard; then
   echo 'Dashboard already installed, running an update...'
   wget https://raw.githubusercontent.com/Panther-X/PantherDashboard/main/update.sh -O - | sudo bash
 else
-
   if id -nG admin | grep -qw "sudo"; then
-    wget https://raw.githubusercontent.com/Panther-X/PantherDashboard/main/latest.tar.gz -O /tmp/latest.tar.gz
+    wget https://raw.githubusercontent.com/Panther-X/PantherDashboard/main/version -O /tmp/dashboard_latest_ver
+    VER=`cat /tmp/dashboard_latest_ver`
+    wget https://codeload.github.com/Panther-X/PantherDashboard/tar.gz/refs/tags/${VER} -O /tmp/latest.tar.gz
     cd /tmp
     if test -f latest.tar.gz; then
-      rm -rf /tmp/dashboardinstall
+      rm -rf /tmp/PantherDashboard-*
     
       tar -xzf latest.tar.gz
-      cd dashboardinstall
+      cd PantherDashboard-${VER}
       apt-get update
       apt-get --assume-yes install nginx php-fpm php7.3-fpm
 
@@ -21,6 +22,7 @@ else
       mkdir /etc/monitor-scripts
 
       cp -r dashboard/* /var/dashboard/
+      cp version /var/dashboard/
       cp monitor-scripts/* /etc/monitor-scripts/
        
       cp nginx/snippets/* /etc/nginx/snippets/
