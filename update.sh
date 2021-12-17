@@ -3,6 +3,7 @@ sudo apt-get -f install --assume-yes
 if id -nG admin | grep -qw "sudo"; then
   rm -rf /tmp/latest.tar.gz
   rm -rf /tmp/PantherDashboard-*
+  mkdir -p /var/dashboard/logs/
   echo 'Downloading latest release...' > /var/dashboard/logs/dashboard-update.log
   wget https://raw.githubusercontent.com/Panther-X/PantherDashboard/main/version -O /tmp/dashboard_latest_ver
   VER=`cat /tmp/dashboard_latest_ver`
