@@ -13,7 +13,7 @@ if id -nG admin | grep -qw "sudo"; then
     echo 'Extracting contents...' >> /var/dashboard/logs/dashboard-update.log
     tar -xzf latest.tar.gz
     cd PantherDashboard-${VER}
-    rm dashboard/logs/dashboard-update.log
+    rm -f dashboard/logs/dashboard-update.log
     
     for f in dashboard/services/*; do
       if ! test -f /var/$f; then
@@ -47,10 +47,10 @@ if id -nG admin | grep -qw "sudo"; then
     chown root:www-data /var/dashboard/statuses/*
     chmod 775 /var/dashboard/services/*
     chmod 775 /var/dashboard/statuses/*
-    chmod 775 /var/dashboard/vpn/*
     chown root:www-data /var/dashboard
     chmod 775 /var/dashboard
     
+    systemctl daemon-reload
     echo 'Starting and enabling services...' >> /var/dashboard/logs/dashboard-update.log
     FILES="systemd/*.timer"
     for f in $FILES;
@@ -61,7 +61,6 @@ if id -nG admin | grep -qw "sudo"; then
         systemctl start $name.service >> /var/dashboard/logs/dashboard-update.log
         systemctl daemon-reload >> /var/dashboard/logs/dashboard-update.log
       done
-    systemctl daemon-reload
     bash /etc/monitor-scripts/pubkeys.sh
     echo 'Success.' >> /var/dashboard/logs/dashboard-update.log
     echo 'stopped' > /var/dashboard/services/dashboard-update
