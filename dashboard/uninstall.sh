@@ -1,7 +1,7 @@
 #!/bin/bash
 systemctl stop nginx
 systemctl disable nginx
-apt-get remove nginx
+apt-get -y remove nginx
 
 rm -rf /var/dashboard
 rm -rf /etc/monitor-scripts
@@ -34,12 +34,12 @@ systemctl disable wifi-check.timer
 systemctl disable wifi-config-check.timer
 systemctl disable wifi-service-check.timer
 
-
 rm -rf /etc/systemd/system/auto-maintain.timer
 rm -rf /etc/systemd/system/auto-maintain.service
 rm -rf /etc/systemd/system/auto-update.timer
 rm -rf /etc/systemd/system/auto-update.service
 rm -rf /etc/systemd/system/bt-check.timer
+rm -rf /etc/systemd/system/bt-check.service
 rm -rf /etc/systemd/system/bt-service-check.service
 rm -rf /etc/systemd/system/bt-service-check.timer
 rm -rf /etc/systemd/system/clear-blockchain-check.timer
@@ -74,8 +74,6 @@ rm -rf /etc/systemd/system/pubkeys-check.service
 rm -rf /etc/systemd/system/pubkeys-check.timer
 rm -rf /etc/systemd/system/reboot-check.service
 rm -rf /etc/systemd/system/reboot-check.timer
-rm -rf /etc/systemd/system/sn-check.service
-rm -rf /etc/systemd/system/sn-check.timer
 rm -rf /etc/systemd/system/temp-check.service
 rm -rf /etc/systemd/system/temp-check.timer
 rm -rf /etc/systemd/system/update-check.service
@@ -93,3 +91,5 @@ rm -rf /etc/systemd/system/wifi-service-check.timer
 
 rm /etc/ssl/certs/nginx-selfsigned.crt
 rm /etc/ssl/private/nginx-selfsigned.key
+
+systemctl daemon-reload
