@@ -3,7 +3,7 @@ rm /tmp/latest.tar.gz
 
 if test -d /var/dashboard; then
   echo 'Dashboard already installed, running an update...'
-  wget https://raw.githubusercontent.com/briffy/PiscesQoLDashboard/main/update.sh -O - | sudo bash
+  wget https://raw.githubusercontent.com/briffy/PantherDashboard/main/update.sh -O - | sudo bash
 else
 
   if id -nG admin | grep -qw "sudo"; then
