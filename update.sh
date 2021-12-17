@@ -4,7 +4,7 @@ if id -nG admin | grep -qw "sudo"; then
   rm -rf /tmp/latest.tar.gz
   rm -rf /tmp/dashboardinstall
   echo 'Downloading latest release...' > /var/dashboard/logs/dashboard-update.log
-  wget --no-cache https://raw.githubusercontent.com/briffy/PantherDashboard/main/latest.tar.gz -O /tmp/latest.tar.gz
+  wget --no-cache https://raw.githubusercontent.com/Panther-X/PantherDashboard/main/latest.tar.gz -O /tmp/latest.tar.gz
   cd /tmp
   if test -f latest.tar.gz; then
     echo 'Extracting contents...' >> /var/dashboard/logs/dashboard-update.log

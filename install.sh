@@ -3,11 +3,11 @@ rm /tmp/latest.tar.gz
 
 if test -d /var/dashboard; then
   echo 'Dashboard already installed, running an update...'
-  wget https://raw.githubusercontent.com/briffy/PantherDashboard/main/update.sh -O - | sudo bash
+  wget https://raw.githubusercontent.com/Panther-X/PantherDashboard/main/update.sh -O - | sudo bash
 else
 
   if id -nG admin | grep -qw "sudo"; then
-    wget https://raw.githubusercontent.com/briffy/PantherDashboard/main/latest.tar.gz -O /tmp/latest.tar.gz
+    wget https://raw.githubusercontent.com/Panther-X/PantherDashboard/main/latest.tar.gz -O /tmp/latest.tar.gz
     cd /tmp
     if test -f latest.tar.gz; then
       rm -rf /tmp/dashboardinstall

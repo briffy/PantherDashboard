@@ -123,10 +123,10 @@ else
 		</section>
 
 		<footer>
-			<a href="https://github.com/briffy/PantherDashboard">Dashboard</a> Version: <?php echo $info['Version'];
+			<a href="https://github.com/Panther-X/PantherDashboard">Dashboard</a> Version: <?php echo $info['Version'];
 			if($info['Version'] != $info['Update'])
 			{
-				echo ' - <a href="https://github.com/briffy/PantherDashboard" title="Update Releases">Update Available - '.$info['Update'].'</a>';
+				echo ' - <a href="https://github.com/Panther-X/PantherDashboard" title="Update Releases">Update Available - '.$info['Update'].'</a>';
 			}
 			?>
 			<br />Miner Version: <?php echo $info['MinerVersion'];
