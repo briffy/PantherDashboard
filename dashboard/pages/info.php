@@ -1,5 +1,6 @@
 <?php
 $info['PeerList'] = trim(file_get_contents("/var/dashboard/statuses/peerlist"));
+$info['PantherXVer'] = trim(file_get_contents("/var/dashboard/statuses/pantherx_ver"));
 $uri = "https://explorer.helium.com/hotspots/".$info['PubKey'];
 
 
@@ -17,7 +18,7 @@ foreach($results[3] as $key => $value)
 	$x++;
 }
 ?>
-<h1>Panther X1 Miner Dashboard - Information</h1>
+<h1>Panther <?php $info['PantherXVer']; ?> Miner Dashboard - Information</h1>
 
 <iframe
 style="width: 100%; border-radius: 10px; box-shadow: 2px 2px 10px rgba(0,0,0,0.5);"

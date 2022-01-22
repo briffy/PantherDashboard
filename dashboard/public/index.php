@@ -9,6 +9,7 @@ $info['Version'] = trim(file_get_contents("/var/dashboard/version"));
 $info['Update'] = trim(file_get_contents("/var/dashboard/update"));
 $info['MinerVersion'] = trim(file_get_contents('/var/dashboard/statuses/current_miner_version'));
 $info['LatestMinerVersion'] = trim(file_get_contents('/var/dashboard/statuses/latest_miner_version'));
+$info['PantherXVer'] = trim(file_get_contents("/var/dashboard/statuses/pantherx_ver"));
 
 if (empty($info['CurrentBlockHeight']))
 {
@@ -32,13 +33,13 @@ else
 <link rel="stylesheet" href="css/fonts.css" />
 <link rel="stylesheet" href="css/hack.css" />
 <script src="js/functions.js"></script>
-<title>Panther X1 Miner Dashboard</title>
+<title>Panther <?php $info['PantherXVer']; ?> Miner Dashboard</title>
 </head>
 
 <body>
 	<header>
 		<div id="logo_container">
-			<a href="/index.php" title="Home"><img src="images/logo.png" /></a>
+			<a href="/index.php" title="Home"><img src="images/logo-<?php strtolower($info['PantherXVer']); ?>.png" /></A>
 		</div>
 
 		<div id="power_container">

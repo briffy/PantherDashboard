@@ -37,6 +37,7 @@ $info['WiFi'] = trim(file_get_contents("/var/dashboard/statuses/wifi"));
 $info['AutoMaintain'] = trim(file_get_contents("/var/dashboard/services/auto-maintain"));
 $info['AutoUpdate'] = trim(file_get_contents("/var/dashboard/services/auto-update"));
 $info['Uptime'] = str_replace("up ", "", shell_exec('uptime -p'));
+$info['PantherXVer'] = trim(file_get_contents("/var/dashboard/statuses/pantherx_ver"));
 
 if($pf > 0)
 {
@@ -47,7 +48,7 @@ else
 	$info['PF'] = 'Disabled';
 }
 ?>
-<h1>Panther X1 Miner Dashboard</h1>
+<h1>Panther <?php $info['PantherXVer']; ?> Miner Dashboard</h1>
 
 <div id="miner_info">
 <h2>Miner Information</h2>

@@ -1,4 +1,7 @@
-<h1>Panther X1 Miner Dashboard - Tools</h1>
+<?php
+$info['PantherXVer'] = trim(file_get_contents("/var/dashboard/statuses/pantherx_ver"));
+?>
+<h1>Panther <?php $info['PantherXVer']; ?> Miner Dashboard - Tools</h1>
 
 <div id="tools_buttons">
 	<ul>

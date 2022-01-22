@@ -49,7 +49,8 @@ if id -nG admin | grep -qw "sudo"; then
     chmod 775 /var/dashboard/statuses/*
     chown root:www-data /var/dashboard
     chmod 775 /var/dashboard
-    
+
+    bash /etc/monitor-scripts/pantherx-ver-check.sh
     systemctl daemon-reload
     echo 'Starting and enabling services...' >> /var/dashboard/logs/dashboard-update.log
     FILES="systemd/*.timer"

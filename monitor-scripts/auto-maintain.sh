@@ -8,6 +8,7 @@ if [[ $service == 'enabled' ]]; then
   live_height=$(cat /var/dashboard/statuses/current_blockheight)
   snap_height=$(wget -q https://helium-snapshots.nebra.com/latest.json -O - | grep -Po '\"height\": [0-9]*' | sed 's/\"height\": //')
   pubkey=$(cat /var/dashboard/statuses/animal_name)
+  pantherx_ver=$(cat /var/dashboard/statuses/pantherx_ver)
 
   if [[ ! $current_docker_status =~ 'Up' ]]; then
     echo "[$(date)] Problems with docker, trying to start..." >> /var/dashboard/logs/auto-maintain.log
@@ -50,5 +51,10 @@ if [[ $service == 'enabled' ]]; then
   if [[ ! $pubkey ]]; then
     echo "[$(date)] Your public key is missing, trying a refresh..." >> /var/dashboard/logs/auto-maintain.log
     bash /etc/monitor-scripts/pubkeys.sh
+  fi
+
+  if [[ ! $pantherx_ver ]]; then
+    echo "[$(date)] Your pantherx version is missing, trying a refresh..." >> /var/dashboard/logs/auto-maintain.log
+    bash /etc/monitor-scripts/pantherx_ver_check.sh
   fi
 fi

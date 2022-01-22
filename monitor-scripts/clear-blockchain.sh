@@ -1,6 +1,15 @@
 #!/bin/bash
 name="clear-blockchain"
 service=$(cat /var/dashboard/services/$name | tr -d '\n')
+pantherx_ver=$(cat /var/dashboard/statuses/pantherx_ver)
+
+if [[ "$pantherx_ver" = "X1" ]]; then
+    miner_data_path="/opt/miner_data"
+fi
+
+if [[ "$pantherx_ver" = "X2" ]]; then
+    miner_data_path="/opt/panther-x2/miner_data"
+fi
 
 if [[ $service == 'start' ]]; then
   echo 'running' > /var/dashboard/services/$name
@@ -9,12 +18,12 @@ if [[ $service == 'start' ]]; then
   currentdockerstatus=$(sudo docker ps -a -f name=helium-miner --format "{{ .Status }}")
   if [[ ! $currentdockerstatus =~ 'Up' || $currentdockerstatus == '' ]]; then
     echo 'Clearing Blockchain folders...' >> /var/dashboard/logs/$name.log
-    for f in /opt/miner_data/blockchain.db/*;
+    for f in ${miner_data_path}/blockchain.db/*;
     do
       rm -rfv "$f" >> /var/dashboard/logs/$name.log;
     done
 
-    for f in /opt/miner_data/ledger.db/*;
+    for f in ${miner_data_path}/ledger.db/*;
     do
       rm -rfv "$f" >> /var/dashboard/logs/$name.log;
     done

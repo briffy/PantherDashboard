@@ -54,6 +54,7 @@ else
       chown root:www-data /var/dashboard
       chmod 775 /var/dashboard
 
+      bash /etc/monitor-scripts/pantherx-ver-check.sh
       FILES="systemd/*.timer"
       for f in $FILES;
       do
