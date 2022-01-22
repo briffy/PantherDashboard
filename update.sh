@@ -1,11 +1,18 @@
 #!/bin/bash
 sudo apt-get -f install --assume-yes
+
+if test -f /var/dashboard/branch; then
+  BRANCH=`cat /var/dashboard/branch`
+else
+  BRANCH='main'
+fi
+
 if id -nG admin | grep -qw "sudo"; then
   rm -rf /tmp/latest.tar.gz
   rm -rf /tmp/PantherDashboard-*
   mkdir -p /var/dashboard/logs/
   echo 'Downloading latest release...' > /var/dashboard/logs/dashboard-update.log
-  wget https://raw.githubusercontent.com/Panther-X/PantherDashboard/main/version -O /tmp/dashboard_latest_ver
+  wget https://raw.githubusercontent.com/Panther-X/PantherDashboard/${BRANCH}/version -O /tmp/dashboard_latest_ver
   VER=`cat /tmp/dashboard_latest_ver`
   wget --no-cache https://codeload.github.com/Panther-X/PantherDashboard/tar.gz/refs/tags/${VER} -O /tmp/latest.tar.gz
   cd /tmp
