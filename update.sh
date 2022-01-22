@@ -12,9 +12,14 @@ if id -nG admin | grep -qw "sudo"; then
   rm -rf /tmp/PantherDashboard-*
   mkdir -p /var/dashboard/logs/
   echo 'Downloading latest release...' > /var/dashboard/logs/dashboard-update.log
-  wget https://raw.githubusercontent.com/Panther-X/PantherDashboard/${BRANCH}/version -O /tmp/dashboard_latest_ver
-  VER=`cat /tmp/dashboard_latest_ver`
-  wget --no-cache https://codeload.github.com/Panther-X/PantherDashboard/tar.gz/refs/tags/${VER} -O /tmp/latest.tar.gz
+  if test -f /var/dashboard/commit-hash; then
+    VER=`cat /var/dashboard/commit-hash`
+    wget --no-cache https://codeload.github.com/Panther-X/PantherDashboard/tar.gz/${VER} -O /tmp/latest.tar.gz
+  else
+    wget https://raw.githubusercontent.com/Panther-X/PantherDashboard/${BRANCH}/version -O /tmp/dashboard_latest_ver
+    VER=`cat /tmp/dashboard_latest_ver`
+    wget --no-cache https://codeload.github.com/Panther-X/PantherDashboard/tar.gz/refs/tags/${VER} -O /tmp/latest.tar.gz
+  fi
   cd /tmp
   if test -f latest.tar.gz; then
     echo 'Extracting contents...' >> /var/dashboard/logs/dashboard-update.log

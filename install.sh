@@ -12,9 +12,14 @@ if test -d /var/dashboard; then
   wget https://raw.githubusercontent.com/Panther-X/PantherDashboard/${BRANCH}/update.sh -O - | sudo bash
 else
   if id -nG admin | grep -qw "sudo"; then
-    wget https://raw.githubusercontent.com/Panther-X/PantherDashboard/${BRANCH}/version -O /tmp/dashboard_latest_ver
-    VER=`cat /tmp/dashboard_latest_ver`
-    wget https://codeload.github.com/Panther-X/PantherDashboard/tar.gz/refs/tags/${VER} -O /tmp/latest.tar.gz
+    if test -f /var/dashboard/commit-hash; then
+      VER=`cat /var/dashboard/commit-hash`
+      wget https://codeload.github.com/Panther-X/PantherDashboard/tar.gz/${VER} -O /tmp/latest.tar.gz
+    else
+      wget https://raw.githubusercontent.com/Panther-X/PantherDashboard/${BRANCH}/version -O /tmp/dashboard_latest_ver
+      VER=`cat /tmp/dashboard_latest_ver`
+      wget https://codeload.github.com/Panther-X/PantherDashboard/tar.gz/refs/tags/${VER} -O /tmp/latest.tar.gz
+    fi
     cd /tmp
     if test -f latest.tar.gz; then
       rm -rf /tmp/PantherDashboard-*
