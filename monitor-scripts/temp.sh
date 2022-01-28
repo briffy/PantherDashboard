@@ -1,9 +1,7 @@
 #!/bin/bash
 
-data=$(vcgencmd measure_temp)
+raw=`awk -v var1=$(</sys/class/thermal/thermal_zone0/temp) -v var2=1000 'BEGIN { print ( var1 / var2 ) }'
+{ print ( var1 / var2 ) }'`
+data=`printf %0.2f $raw`
 
-if [[ $data =~ temp=(.*) ]]; then
-  match="${BASH_REMATCH[1]}"
-fi
-
-echo $match > /var/dashboard/statuses/temp
+echo ${data}\'C > /var/dashboard/statuses/temp
