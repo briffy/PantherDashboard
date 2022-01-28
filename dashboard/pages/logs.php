@@ -4,7 +4,7 @@ $logs['witnesses'] = shell_exec('docker exec helium-miner  tac /var/data/log/con
 $logs['errors'] = shell_exec('docker exec helium-miner tail -100 /var/data/log/error.log | tac');
 $info['PantherXVer'] = trim(file_get_contents("/var/dashboard/statuses/pantherx_ver"));
 ?>
-<h1>Panther <?php $info['PantherXVer']; ?> Miner Dashboard - Logs</h1>
+<h1>Panther <?php echo $info['PantherXVer']; ?> Miner Dashboard - Logs</h1>
 
 <div class="log_container">
 	<h2>Miner Logs</h2>

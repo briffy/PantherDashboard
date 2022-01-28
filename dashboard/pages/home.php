@@ -48,7 +48,7 @@ else
 	$info['PF'] = 'Disabled';
 }
 ?>
-<h1>Panther <?php $info['PantherXVer']; ?> Miner Dashboard</h1>
+<h1>Panther <?php echo $info['PantherXVer']; ?> Miner Dashboard</h1>
 
 <div id="miner_info">
 <h2>Miner Information</h2>

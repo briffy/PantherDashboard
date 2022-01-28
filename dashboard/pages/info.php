@@ -18,7 +18,7 @@ foreach($results[3] as $key => $value)
 	$x++;
 }
 ?>
-<h1>Panther <?php $info['PantherXVer']; ?> Miner Dashboard - Information</h1>
+<h1>Panther <?php echo $info['PantherXVer']; ?> Miner Dashboard - Information</h1>
 
 <iframe
 style="width: 100%; border-radius: 10px; box-shadow: 2px 2px 10px rgba(0,0,0,0.5);"

@@ -33,13 +33,13 @@ else
 <link rel="stylesheet" href="css/fonts.css" />
 <link rel="stylesheet" href="css/hack.css" />
 <script src="js/functions.js"></script>
-<title>Panther <?php $info['PantherXVer']; ?> Miner Dashboard</title>
+<title>Panther <?php echo $info['PantherXVer']; ?> Miner Dashboard</title>
 </head>
 
 <body>
 	<header>
 		<div id="logo_container">
-			<a href="/index.php" title="Home"><img src="images/logo-<?php strtolower($info['PantherXVer']); ?>.png" /></A>
+			<a href="/index.php" title="Home"><img src="images/logo-<?php echo strtolower($info['PantherXVer']); ?>.png" /></A>
 		</div>
 
 		<div id="power_container">
