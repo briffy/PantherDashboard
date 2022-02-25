@@ -10,6 +10,7 @@ $info['Update'] = trim(file_get_contents("/var/dashboard/update"));
 $info['MinerVersion'] = trim(file_get_contents('/var/dashboard/statuses/current_miner_version'));
 $info['LatestMinerVersion'] = trim(file_get_contents('/var/dashboard/statuses/latest_miner_version'));
 $info['PantherXVer'] = trim(file_get_contents("/var/dashboard/statuses/pantherx_ver"));
+$info['FirmwareVersion'] = trim(file_get_contents("/etc/ota_version"));
 
 if (empty($info['CurrentBlockHeight']))
 {
@@ -139,6 +140,8 @@ else
 			{
 				echo ' - <a href="?tools.php=updateminer">Update Available</a>';
 			}
+			?>
+			<br />Panther X Firmware Version: <?php echo $info['FirmwareVersion'];
 			?>
 		</footer>
 		<br class="clear" />
