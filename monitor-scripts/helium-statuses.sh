@@ -18,4 +18,3 @@ else
 fi
 
 echo $height > /var/dashboard/statuses/current_blockheight
-bash /etc/monitor-scripts/info-height.sh
