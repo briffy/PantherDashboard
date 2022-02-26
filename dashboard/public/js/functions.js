@@ -211,7 +211,6 @@ function StartBlockChainClear()
 	}, 1000)
 }
 
-
 function ClearBlockChainRedirect()
 {
 	window.location.replace("/index.php?page=clearblockchain");
@@ -222,3 +221,18 @@ function ClosePrompt()
 	var prompt = document.getElementsByClassName("closeable_prompt_overlay");
 	prompt[0].remove();
 }
+
+$(document).ready(function(){
+	$("#miner_height").text("Loading");
+	$("#live_height").text("Loading");
+	$("#online_status").text("Loading");
+	$.get("HeliumStatus.php",function(data){
+		$("#miner_height").text(data.miner_height);
+		$("#live_height").text(data.live_height);
+		$("#online_status").text(data.online_status);
+	}).error(function(){
+		$("#online_status").text("Maintenance");
+		$("#miner_height").text("Maintenance");
+		$("#live_height").text("Maintenance");
+	})
+})

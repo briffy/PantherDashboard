@@ -32,7 +32,9 @@ else
 <link rel="stylesheet" href="css/common.css" />
 <link rel="stylesheet" href="css/fonts.css" />
 <link rel="stylesheet" href="css/hack.css" />
+<script src="js/jquery-2.1.4.min.js"></script>
 <script src="js/functions.js"></script>
+
 <title>Panther <?php echo $info['PantherXVer']; ?> Miner Dashboard</title>
 </head>
 
@@ -111,8 +113,10 @@ else
 				<span class="icon-grid"></span>
 				<h3>BlockChain Info</h3>
 				<ul id="info_height_data">
-					<?php 
-					echo $sync.'<li>Miner Height: '.$info['MinerBlockHeight'].'</li><li>Live Height: '.$info['CurrentBlockHeight'].'</li><li>Online Status: '.$info['OnlineStatus'].'</li>'; ?>
+					<?php echo $sync ?>
+					<li>Miner Height: <span id="miner_height">Loading</span></li>
+					<li>Live Height: <span id="live_height">Loading</span></li>
+					<li>Online Status: <span id="online_status">Loading</span></li>
 				</ul>
 			</div>
 
