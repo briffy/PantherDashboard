@@ -75,7 +75,7 @@ function SetWireless()
 	var ssid = document.getElementById("SSID").value;
 	var password = document.getElementById("password").value;
 	var country = document.getElementById("country").value;
-	var params = 'SSID='+ssid+'&password='+password+'&country='+country;
+	var params = 'SSID='+encodeURIComponent(ssid)+'&password='+encodeURIComponent(password)+'&country='+encodeURIComponent(country);
 	httpRequest = new XMLHttpRequest();
 	httpRequest.open('POST', 'SetWireless.php', true);
 	httpRequest.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
