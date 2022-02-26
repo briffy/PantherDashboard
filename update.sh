@@ -49,6 +49,9 @@ if id -nG admin | grep -qw "sudo"; then
     rm -rf dashboard/statuses/*
     rm -rf dashboard/logs/*
     rm nginx/.htpasswd
+
+    systemctl disable helium-status-check.timer
+    rm -rf /etc/systemd/system/helium-status-check.timer
     
     cp monitor-scripts/* /etc/monitor-scripts/   
     cp -r dashboard/* /var/dashboard/
