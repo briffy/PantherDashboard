@@ -45,7 +45,7 @@ function ResetPassword()
 {
 	var password = document.getElementById("password").value;
 	var confirmpassword = document.getElementById("confirm_password").value;
-	var params = 'password='+password+'&confirmpassword='+confirmpassword;
+	var params = 'password='+encodeURIComponent(password)+'&confirmpassword='+encodeURIComponent(confirmpassword);
 	httpRequest = new XMLHttpRequest();
 	httpRequest.open('POST', 'ResetPassword.php', true);
 	httpRequest.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
