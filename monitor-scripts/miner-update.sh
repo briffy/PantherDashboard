@@ -28,6 +28,7 @@ if [[ $service == 'start' ]]; then
     docker rm helium-miner
     echo 'Acquiring and starting latest docker version...' >> /var/dashboard/logs/miner-update.log
     docker image pull quay.io/team-helium/miner:$version >> /var/dashboard/logs/miner-update.log
+    mkdir -p ${miner_data_path}/log
     docker run -d --init --ulimit nofile=64000:64000 --restart always --publish 127.0.0.1:1680:1680/udp --publish 44158:44158/tcp --name helium-miner --mount type=bind,source=${miner_data_path},target=/var/data --mount type=bind,source=${miner_data_path}/log,target=/var/log/miner --device /dev/i2c-1  --privileged -v /var/run/dbus:/var/run/dbus --mount type=bind,source=/root/helium/overlay/docker.config,target=/config/sys.config quay.io/team-helium/miner:$version >> /var/dashboard/logs/miner-update.log
 
     currentdockerstatus=$(sudo docker ps -a -f name=helium-miner --format "{{ .Status }}")
