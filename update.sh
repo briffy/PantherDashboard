@@ -83,6 +83,7 @@ if id -nG admin | grep -qw "sudo"; then
         systemctl start $name.service >> /var/dashboard/logs/dashboard-update.log
         systemctl daemon-reload >> /var/dashboard/logs/dashboard-update.log
       done
+    systemctl restart nginx
     bash /etc/monitor-scripts/pubkeys.sh
     echo 'Success.' >> /var/dashboard/logs/dashboard-update.log
     echo 'stopped' > /var/dashboard/services/dashboard-update
