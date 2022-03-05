@@ -37,7 +37,7 @@ function ResetPasswordPrompt()
 {
 	var passwordbox = document.createElement("div");
 	passwordbox.className = "closeable_prompt_overlay";
-	passwordbox.innerHTML = '<div id="closeable_prompt"><div id="prompt_title"><h2>Reset Password</h2><button type="button" onclick="ClosePrompt()" value="Close" title="Close" id="CloseButton">X</button></div><div id="prompt_body"><div id="inputs"><label for="password">Password:</label><input type="password" id="password" name="password"><br /><label for="confirm_password">Confirm Password:</label><input type="password" name="confirm_password" id="confirm_password" /></div></div><div id="prompt_footer"><button id="reset_password_button" onclick="ResetPassword()"; type="button">Submit</button></div></div>';
+	passwordbox.innerHTML = '<div id="closeable_prompt"><div id="prompt_title"><h2>Reset Password</h2><button type="button" onclick="ClosePrompt()" value="Close" title="Close" id="CloseButton">X</button></div><div id="prompt_body"><div id="inputs"><label for="password">Password:</label><input type="password" minlength="6" maxlength="1024" autocomplete="off" placeholder="At least 6 characters" id="password" name="password"><br /><label for="confirm_password">Confirm Password:</label><input type="password" minlength="6" maxlength="1024" autocomplete="off" placeholder="At least 6 characters" name="confirm_password" id="confirm_password" /></div></div><div id="prompt_footer"><button id="reset_password_button" onclick="ResetPassword()"; type="button">Submit</button></div></div>';
 	var body = document.body.appendChild(passwordbox);
 }
 

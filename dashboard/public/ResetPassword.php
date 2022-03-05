@@ -6,7 +6,10 @@ $x = 0;
 $clearTextPassword = trim(html_entity_decode($_POST['password']));
 $confirmPassword = trim(html_entity_decode($_POST['confirmpassword']));
 
-if(($clearTextPassword == $confirmPassword) && $clearTextPassword != "")
+if(strlen($clearTextPassword) < 6)
+{
+	echo 'minimum 6 characters required';
+} elseif(($clearTextPassword == $confirmPassword) && $clearTextPassword != "")
 {
 	function crypt_apr1_md5($plainpasswd)
 	{
@@ -85,11 +88,10 @@ if(($clearTextPassword == $confirmPassword) && $clearTextPassword != "")
 	$sshpasswordfile = fopen("/var/dashboard/password", "w");
 	fwrite($sshpasswordfile, $clearTextPassword);
 
-	echo 'Password Reset';
+	echo 'password reset sucessfully';
 }
-
 else
 {
-	echo 'Password reset failed';
+	echo 'password is not match';
 }
 ?>
