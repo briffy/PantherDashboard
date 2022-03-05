@@ -52,7 +52,13 @@ if id -nG admin | grep -qw "sudo"; then
 
     systemctl disable helium-status-check.timer
     rm -rf /etc/systemd/system/helium-status-check.timer
-    
+
+    # Remove /etc/ssl/certs/dhparam.pem if it is empty and regenerate it
+    [ -s /etc/ssl/certs/dhparam.pem ] || rm -f /etc/ssl/certs/dhparam.pem
+    if ! test -f /etc/ssl/certs/dhparam.pem; then
+	    openssl dhparam -out /etc/ssl/certs/dhparam.pem 2048
+    fi
+
     cp monitor-scripts/* /etc/monitor-scripts/   
     cp -r dashboard/* /var/dashboard/
     cp version /var/dashboard/

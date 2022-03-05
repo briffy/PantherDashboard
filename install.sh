@@ -43,6 +43,8 @@ else
         cp nginx/.htpasswd /var/dashboard/.htpasswd
       fi
     
+      # Remove /etc/ssl/certs/dhparam.pem if it is empty
+      [ -s /etc/ssl/certs/dhparam.pem ] || rm -f /etc/ssl/certs/dhparam.pem
       if ! test -f /etc/ssl/certs/dhparam.pem; then
         openssl dhparam -out /etc/ssl/certs/dhparam.pem 2048 
       fi
