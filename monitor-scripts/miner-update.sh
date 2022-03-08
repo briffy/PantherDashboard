@@ -17,13 +17,6 @@ if [[ $service == 'start' ]]; then
   docker stop helium-miner >> /var/dashboard/logs/miner-update.log
   currentdockerstatus=$(sudo docker ps -a -f name=helium-miner --format "{{ .Status }}")
   if [[ $currentdockerstatus =~ 'Exited' || $currentdockerstatus == '' ]]; then
-    echo 'Backing up current config...' >> /var/dashboard/logs/miner-update.log
-    currentconfig=$(sudo docker inspect helium-miner | grep sys.config | grep -Po '"Source": ".*\/sys.config' | sed 's/"Source": "//' | sed -n '1p')
-    mkdir ${miner_data_path}/configs
-    mkdir ${miner_data_path}/configs/previous_configs
-    currentversion=$(docker ps -a -f name=helium-miner --format "{{ .Image }}" | grep -Po 'miner: *.+' | sed 's/miner://')
-    cp "$currentconfig" "${miner_data_path}/configs/previous_configs/$currentversion.config" >> /var/dashboard/logs/miner-update.log
-
     echo 'Removing currently running docker...' >> /var/dashboard/logs/miner-update.log
     docker rm helium-miner
     echo 'Acquiring and starting latest docker version...' >> /var/dashboard/logs/miner-update.log
