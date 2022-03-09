@@ -30,6 +30,13 @@ if [ $retval -ne 0 ]; then
     systemctl daemon-reload
     systemctl restart connman
 fi
+
+## Fix missing data folder for miner
+grep "/opt/miner_data/log" /etc/cron.hourly/helium-miner-status
+retval=$?
+if [ $retval -ne 0 ]; then
+sed -i 's/rm -rf \/opt\/miner_data\/\*$/rm -rf \/opt\/miner_data\/*;mkdir -p \/opt\/miner_data\/log/g' /etc/cron.hourly/helium-miner-status
+fi
 fi
 
 # Patches for Panther X2
@@ -69,5 +76,12 @@ if [ $retval -ne 0 ]; then
     sed -i 's/ExecStart=.*$/ExecStart=\/usr\/sbin\/connmand -n -r/g' /lib/systemd/system/connman.service
     systemctl daemon-reload
     systemctl restart connman
+fi
+
+## Fix missing data folder for miner
+grep "/opt/panther-x2/miner_data/log" /etc/cron.hourly/helium-miner-status
+retval=$?
+if [ $retval -ne 0 ]; then
+sed -i 's/rm -rf \/opt\/panther-x2\/miner_data\/\*$/rm -rf \/opt\/panther-x2\/miner_data\/*;mkdir -p \/opt\/panther-x2\/miner_data\/log/g' /etc/cron.hourly/helium-miner-status
 fi
 fi
