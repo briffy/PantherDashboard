@@ -139,13 +139,13 @@ else
 			<a href="https://github.com/Panther-X/PantherDashboard">Dashboard</a> Version: <?php echo $info['Version'];
 			if($info['Version'] != $info['Update'])
 			{
-				echo ' - <a href="https://github.com/Panther-X/PantherDashboard" title="Update Releases">Update Available - '.$info['Update'].'</a>';
+				echo ' - <a href="/index.php?page=updatedashboard" title="Update Releases">Update Available - '.$info['Update'].'</a>';
 			}
 			?>
 			<br />Miner Version: <?php echo $info['MinerVersion'];
 			if($info['MinerVersion'] != $info['LatestMinerVersion'])
 			{
-				echo ' - <a href="?tools.php=updateminer">Update Available</a>';
+				echo ' - <a href="/index.php?page=updateminer">Update Available</a>';
 			}
 			?>
 			<br />Panther X Firmware Version: <?php echo $info['FirmwareVersion'];
