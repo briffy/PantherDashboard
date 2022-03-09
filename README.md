@@ -12,6 +12,14 @@ This is the Dashboard for Panther X Miner, it can support Panther X1 and Panther
 
 ## Change Log ##
 
+- 0.2.14
+
+1. Fix fastsync flag keep spinning after sync is completed
+2. Don't need to backup docker config right now
+3. Disable connmon DNS proxy
+4. Show SN in the footer, Only Panther X2 (except CN470) support
+5. Fix wrong URL for miner and dashboard update
+
 - 0.2.13
 
 1. Fix the issue that dashboard on some machine could not be opened due to certificate exception.
