@@ -21,6 +21,15 @@ if [ "\$ret" != "0" ]; then
 fi
 EOF
 fi
+
+## Disable connmon DNS proxy
+echo "eae373c7ca2825c93d9408327d78eecf  /lib/systemd/system/connman.service" | md5sum -c
+retval=$?
+if [ $retval -ne 0 ]; then
+    sed -i 's/ExecStart=.*$/ExecStart=\/usr\/sbin\/connmand -n -r/g' /lib/systemd/system/connman.service
+    systemctl daemon-reload
+    systemctl restart connman
+fi
 fi
 
 # Patches for Panther X2
@@ -51,5 +60,14 @@ if [ "\$ret" != "0" ]; then
     fi
 fi
 EOF
+fi
+
+## Disable connmon DNS proxy
+echo "a8e57c6d177f10600fcbc68fedcc8f8a  /lib/systemd/system/connman.service" | md5sum -c
+retval=$?
+if [ $retval -ne 0 ]; then
+    sed -i 's/ExecStart=.*$/ExecStart=\/usr\/sbin\/connmand -n -r/g' /lib/systemd/system/connman.service
+    systemctl daemon-reload
+    systemctl restart connman
 fi
 fi
