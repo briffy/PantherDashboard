@@ -248,7 +248,7 @@ body .closeable_prompt_overlay #closeable_prompt select option {
 }
 
 #main #content #toggle_buttons .enabled {
-	border-color: rgba(255, 255, 255, 0.8);
+	border-color: rgba(44, 255, 0, 0.8);
 }
 
 #main #content #toggle_buttons .disabled {
