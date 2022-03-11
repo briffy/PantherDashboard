@@ -11,7 +11,15 @@ if [[ "$pantherx_ver" = "X2" ]]; then
     miner_data_path="/opt/panther-x2/miner_data"
 fi
 
+# Fix invalid status when boot finish
+if [[ $service == 'running' ]]; then
+  if [[ ! -f /tmp/dashboard-$name-flag ]]; then
+    echo 'stopped' > /var/dashboard/services/$name
+  fi
+fi
+
 if [[ $service == 'start' ]]; then
+  touch /tmp/dashboard-$name-flag
   echo 'running' > /var/dashboard/services/$name
   echo 'Stopping currently running docker...' > /var/dashboard/logs/$name.log
   docker kill helium-miner >> /var/dashboard/logs/$name.log
