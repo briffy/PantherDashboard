@@ -12,6 +12,13 @@ This is the Dashboard for Panther X Miner, it can support Panther X1 and Panther
 
 ## Change Log ##
 
+- 0.2.15
+
+1. Update color for service enable
+2. Fix clear blockchain failed after a sudden power failure
+3. Fix update miner failed after a sudden power failure
+4. Fix update dashboard failed after a sudden power failure
+
 - 0.2.14
 
 1. Fix fastsync flag keep spinning after sync is completed
