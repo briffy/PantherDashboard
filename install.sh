@@ -30,6 +30,7 @@ else
       apt-get --assume-yes install nginx php-fpm php7.3-fpm
 
       mkdir /var/dashboard
+      mkdir /var/dashboard/logs
       mkdir /etc/monitor-scripts
 
       cp -r dashboard/* /var/dashboard/
@@ -66,6 +67,7 @@ else
       chmod 775 /var/dashboard/.htpasswd
       chown root:www-data /var/dashboard
       chmod 775 /var/dashboard
+      chmod 775 /var/dashboard/logs
 
       bash /etc/monitor-scripts/pantherx-ver-check.sh
       FILES="systemd/*.timer"
