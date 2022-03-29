@@ -12,6 +12,12 @@ This is the Dashboard for Panther X Miner, it can support Panther X1 and Panther
 
 ## Change Log ##
 
+- 0.2.16
+
+1. Fix miner upgrade failed after the first installation
+2. Fix disk usage for Panther X2
+3. Clean peer book when clearing blockchain data
+
 - 0.2.15
 
 1. Update color for service enable
