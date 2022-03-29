@@ -1,9 +1,5 @@
 <?php
 $load = sys_getloadavg();
-$diskfree = disk_free_space(".") / 1073741824;
-$disktotal = disk_total_space(".") / 1073741824;
-$diskused = $disktotal - $diskfree;
-$diskusage = round($diskused/$disktotal*100);
 $stats = @file_get_contents("/proc/meminfo");
 
 $stats = str_replace(array("\r\n", "\n\r", "\r"), "\n", $stats);
@@ -27,7 +23,6 @@ $pretty = array("LAN", "WLAN");
 $info['IP'] = str_replace($raw, $pretty, trim(file_get_contents("/var/dashboard/statuses/local-ip")));
 $info['ExternalIP'] = trim(file_get_contents("/var/dashboard/statuses/external-ip"));
 $info['CPU'] = $load[0];
-$info['DiskUsage'] = round($diskused/$disktotal*100, 2)."%";
 
 $pf = trim(file_get_contents("/var/dashboard/statuses/packet-forwarder"));
 $info['BT'] = trim(ucfirst(file_get_contents("/var/dashboard/statuses/bt")));
@@ -38,6 +33,21 @@ $info['AutoMaintain'] = trim(file_get_contents("/var/dashboard/services/auto-mai
 $info['AutoUpdate'] = trim(file_get_contents("/var/dashboard/services/auto-update"));
 $info['Uptime'] = str_replace("up ", "", shell_exec('uptime -p'));
 $info['PantherXVer'] = trim(file_get_contents("/var/dashboard/statuses/pantherx_ver"));
+
+if ($info['PantherXVer'] == 'X1')
+{
+	$diskfree = disk_free_space("/opt/miner_data") / 1073741824;
+	$disktotal = disk_total_space("/opt/miner_data") / 1073741824;
+}
+
+if ($info['PantherXVer'] == 'X2')
+{
+	$diskfree = disk_free_space("/opt/panther-x2/miner_data") / 1073741824;
+	$disktotal = disk_total_space("/opt/panther-x2/miner_data") / 1073741824;
+}
+
+$diskused = $disktotal - $diskfree;
+$info['DiskUsage'] = round($diskused/$disktotal*100, 2)."%";
 
 if($pf > 0)
 {
