@@ -36,6 +36,8 @@ if [[ $service == 'start' ]]; then
       rm -rfv "$f" >> /var/dashboard/logs/$name.log;
     done
 
+    rm -rfv ${miner_data_path}/blockchain_swarm/ >> /var/dashboard/logs/$name.log;
+
     docker start helium-miner
     currentdockerstatus=$(sudo docker ps -a -f name=helium-miner --format "{{ .Status }}")
     if [[ $currentdockerstatus =~ 'Up' ]]; then
