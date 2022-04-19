@@ -143,7 +143,7 @@ else
 			}
 			?>
 			<br />Miner Version: <?php echo $info['MinerVersion'];
-			if($info['MinerVersion'] != $info['LatestMinerVersion'])
+			if($info['LatestMinerVersion'] != '' && $info['MinerVersion'] != $info['LatestMinerVersion'])
 			{
 				echo ' - <a href="/index.php?page=updateminer">Update Available</a>';
 			}
