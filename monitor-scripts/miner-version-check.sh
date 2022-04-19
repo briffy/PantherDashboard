@@ -1,5 +1,9 @@
 #!/bin/bash
-latest=$(curl -s https://quay.io/api/v1/repository/team-helium/miner/tag/ | grep -Po 'miner-arm64_[0-9]+\.[0-9]+\.[0-9]+\.[^"]+_GA' | sort -n | tail -1)
+if test -f /var/dashboard/branch; then
+  BRANCH=`cat /var/dashboard/branch`
+else
+  BRANCH='main'
+fi
 
-echo $latest > /var/dashboard/statuses/latest_miner_version
+wget --no-cache https://raw.githubusercontent.com/Panther-X/PantherDashboard/${BRANCH}/latest_miner_version -O /var/dashboard/statuses/latest_miner_version
 docker ps --format "{{.Image}}" --filter "name=helium-miner" | grep -Po "miner-arm64_.*" > /var/dashboard/statuses/current_miner_version
