@@ -12,6 +12,10 @@ This is the Dashboard for Panther X Miner, it can support Panther X1 and Panther
 
 ## Change Log ##
 
+- 0.2.17
+1. Fix miner version check
+2. Update the server for miner version check
+
 - 0.2.16
 
 1. Fix miner upgrade failed after the first installation
