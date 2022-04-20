@@ -65,7 +65,7 @@ else
 				<li <?php if($page == 'home' || $page == '') { echo 'class="active_page"'; } ?>><a href="/index.php" title="Homepage"><span class="icon-home"></span><span class="text">Home</span></a></li>
 				<li <?php if($page == 'tools') { echo 'class="active_page"'; } ?>><a href="/?page=tools" title="Tools"><span class="icon-wrench"></span><span class="text">Tools</span></a></li>
 				<li <?php if($page == 'info') { echo 'class="active_page"'; } ?>><a href="/?page=info" title="Information"><span class="icon-info"></span><span class="text">Info</span></a></li>
-				<li <?php if($page == 'logs') { echo 'class="active_page"'; } ?>><a href="/?page=logs" title="Logs"><span class="icon-list"></span><span class="text">Logs</span></a></li>
+				<li <?php if($page == 'logs' || $page == 'minerloganalyzer') { echo 'class="active_page"'; } ?>><a href="/?page=logs" title="Logs"><span class="icon-list"></span><span class="text">Logs</span></a></li>
 			</ul>
 
 		</nav>
@@ -107,6 +107,10 @@ else
 
 				case 'clearblockchain':
 					include('/var/dashboard/pages/clearblockchain.php');
+					break;
+
+				case 'minerloganalyzer':
+					include('/var/dashboard/pages/minerloganalyzer.php');
 					break;
 
 				default:

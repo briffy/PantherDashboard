@@ -16,6 +16,10 @@ if ($info['PantherXVer'] == 'X2') {
 <h1>Panther <?php echo $info['PantherXVer']; ?> Miner Dashboard - Logs</h1>
 
 <div class="log_container">
+<a href="/?page=minerloganalyzer" title="Miner Log Analyzer"><span class="text"><h2>Analysis log with Helium Miner Log Analyzer</span></h2></a>
+<div>
+
+<div class="log_container">
 	<h2>Miner Logs</h2>
 	<div class="wrapper"><textarea class="log_output" wrap="off"><?php echo $logs['miner']; ?></textarea></div>
 </div>
