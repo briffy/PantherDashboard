@@ -42,6 +42,13 @@ else
 <link rel="stylesheet" href="css/hack.css" />
 <script src="js/jquery-2.1.4.min.js"></script>
 <script src="js/functions.js"></script>
+<?php
+if ($info['PantherXVer'] == 'X1') {
+    echo '<link rel="shortcut icon" href="favicon-x1.ico" type="image/x-icon" />';
+} elseif ($info['PantherXVer'] == 'X2') {
+    echo '<link rel="shortcut icon" href="favicon-x2.ico" type="image/x-icon" />';
+}
+?>
 
 <title>Panther <?php echo $info['PantherXVer']; ?> Miner Dashboard</title>
 </head>
