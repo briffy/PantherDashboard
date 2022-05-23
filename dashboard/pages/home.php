@@ -32,6 +32,7 @@ $info['WiFi'] = trim(file_get_contents("/var/dashboard/statuses/wifi"));
 $info['AutoMaintain'] = trim(file_get_contents("/var/dashboard/services/auto-maintain"));
 $info['AutoUpdate'] = trim(file_get_contents("/var/dashboard/services/auto-update"));
 $info['Uptime'] = str_replace("up ", "", shell_exec('uptime -p'));
+$info['Timezone'] = trim(file_get_contents("/etc/timezone"));
 $info['PantherXVer'] = trim(file_get_contents("/var/dashboard/statuses/pantherx_ver"));
 
 if ($info['PantherXVer'] == 'X1')
@@ -69,6 +70,7 @@ else
 <li>Disk: <?php echo $info['DiskUsage']; ?></li>
 <li>Temp: <?php echo $info['Temp']; ?></li>
 <li>Uptime: <?php echo $info['Uptime']; ?></li>
+<li>Timezone: <?php echo $info['Timezone']; ?></li>
 </ul>
 </div>
 
