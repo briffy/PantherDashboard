@@ -75,6 +75,7 @@ foreach (array_keys($opts) as $opt) switch ($opt) {
         echo "\nUsing logs in folder {$logsFolder}\n\n";
         $beacons = extractData($logsFolder, $startDate, $endDate);
         echo generateStats($beacons);
+        echo generateList($beacons);
         echo "</div>";
         break;
 
@@ -133,14 +134,34 @@ function generateStats($beacons) {
     $percentageSuccessful = round($successful/$total*100,2);
     $percentageFailed = round($totalFailed/$total*100,2);
 
-    $output = "\n<br><br>General Witnesses Overview  <br>\n";
-    $output.= "----------------------------------<br>\n";
-    $output.= "Total witnesses                   = ". str_pad($total, 5, " ", STR_PAD_LEFT) .
-        str_pad(" ({$totalPerHour}/hour)", 13, " ", STR_PAD_LEFT)  . "<br>\n";
-    $output.= "Succesfully delivered             = ". str_pad($successful, 5, " ", STR_PAD_LEFT) .
-        str_pad("({$percentageSuccessful}%)", 9, " ", STR_PAD_LEFT)  . "<br>\n";
-    $output.= "Failed                            = ". str_pad($totalFailed, 5, " ", STR_PAD_LEFT) .
-        str_pad("({$percentageFailed}%)", 9, " ", STR_PAD_LEFT) . "<br>\n";
+    $output = '<br><br><p><br><h2 style="color:#AED6F1;">General Witnesses Overview</h2></p><br>';
+    $output.='<table border="1" style="width: 100%; height: 100%">';
+    $output.= "
+        <tr border='1' align='left' style='color:#FCF3CF ;' >
+        <th style='width:60%'> Description </th>
+        <th align='center'> Value </th>
+        <th align='center'> Precentage </th>
+        </tr>";
+
+	$output.= "
+		<tr border='1'>
+			<td> Total witnesses </td>
+			  <td align='center'> {$total} </td>
+			 <td align='center'> {$totalPerHour} / hour  </td>
+		</tr>";
+	$output.= "
+		<tr border='1'>
+			<td> Succesfully delivered  </td>
+			<td align='center'> {$successful} </td>
+			 <td align='center'> {$percentageSuccessful} %</td>
+		</tr> ";
+	$output.= "
+		<tr border='1'>
+			<td> Failed  </td>
+			 <td align='center'> {$totalFailed} </td>
+			 <td align='center'> {$percentageFailed}% </td>
+		</tr> ";
+	$output.= " </table>";
 
     return $output;
 }
@@ -155,8 +176,17 @@ function generateList($beacons) {
     }
     $systemDate = new DateTime();
 
-    $output = "Date                | Freq  | RSSI | SNR   | Noise  | Status  \n";
-    $output.= "------------------------------------------------------------- \n";
+    $output = '<br><p><br><h2 style="color:#AED6F1;">Witnesses List</h2></p>';
+    $output .= '<br>
+            <table border="1" style="width: 100%; height: 100%">
+            <tr style="color:#FCF3CF ;">
+            <th align="left">Date</th>
+            <th>Freq</th>
+            <th>RSSI</th>
+            <th>SNR</th>
+            <th>Noise</th>
+            <th>Status</th>
+            </tr>';
 
     foreach ($beacons as $beacon) {
 
@@ -171,10 +201,18 @@ function generateList($beacons) {
         $datetimeStr = $datetime->format("d-m-Y H:i:s");
         //$reason = @$beacon['reason'];
 
-        $output.=@"{$datetimeStr} | {$beacon['freq']} | {$rssi} | {$snr} | {$noise} | {$status}  \n";
+        $output.=@"
+        <tr border='1'>
+        <td> {$datetimeStr} </td>
+        <td> {$beacon['freq']} </td>
+        <td> {$rssi} </td>
+        <td> {$snr} </td>
+        <td> {$noise} </td>
+        <td> {$status} </td>
+        </tr>";
 
     }
-    return $output;
+    return $output."</table>";
 }
 
 /**
