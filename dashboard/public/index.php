@@ -117,7 +117,11 @@ if ($info['PantherXVer'] == 'X1') {
 					break;
 
 				case 'minerloganalyzer':
-					include('/var/dashboard/pages/minerloganalyzer.php');
+					// Light version: https://engineering.helium.com/2022/05/10/miner-firmware-hotspot-release.html
+					if ($info['LatestMinerVersion'] != '' && (strcmp($info['LatestMinerVersion'], 'miner-arm64_2022.05.10.0_GA') < 0))
+						include('/var/dashboard/pages/minerloganalyzer.php');
+					else
+						include('/var/dashboard/pages/minerlightloganalyzer.php');
 					break;
 
 				default:
