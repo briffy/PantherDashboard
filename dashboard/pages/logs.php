@@ -3,13 +3,13 @@ $info['PantherXVer'] = trim(file_get_contents("/var/dashboard/statuses/pantherx_
 
 if ($info['PantherXVer'] == 'X1') {
 	$logs['miner'] = shell_exec('tail -300 /opt/miner_data/log/console.log | tac');
-	$logs['witnesses'] = shell_exec('tac /opt/miner_data/log/console.log | grep -E "miner_onion_server:send_witness|miner_onion_server:decrypt|client sending data"');
+	$logs['witnesses'] = shell_exec('tac /opt/miner_data/log/console.log | grep -E "miner_onion_server:send_witness|client sending data|miner_onion_server[_light]*:decrypt|miner_poc_grpc_client_statem:connected:|send_report witness with onionkeyhash"');
 	$logs['errors'] = shell_exec('tail -100 /opt/miner_data/log/error.log | tac');
 }
 
 if ($info['PantherXVer'] == 'X2') {
 	$logs['miner'] = shell_exec('tail -300 /opt/panther-x2/miner_data/log/console.log | tac');
-	$logs['witnesses'] = shell_exec('tac /opt/panther-x2/miner_data/log/console.log | grep -E "miner_onion_server:send_witness|miner_onion_server:decrypt|client sending data"');
+	$logs['witnesses'] = shell_exec('tac /opt/panther-x2/miner_data/log/console.log | grep -E "miner_onion_server:send_witness|client sending data|miner_onion_server[_light]*:decrypt|miner_poc_grpc_client_statem:connected:|send_report witness with onionkeyhash"');
 	$logs['errors'] = shell_exec('tail -100 /opt/panther-x2/miner_data/log/error.log | tac');
 }
 ?>
