@@ -25,33 +25,30 @@ if id -nG admin | grep -qw "sudo"; then
     echo 'Extracting contents...' >> /var/dashboard/logs/dashboard-update.log
     tar -xzf latest.tar.gz
     cd PantherDashboard-${VER}
-    rm -f dashboard/logs/dashboard-update.log
     
+    # Add the new services
     for f in dashboard/services/*; do
       if ! test -f /var/$f; then
         cp $f /var/dashboard/services
       fi
     done
     
+    # Add the new statuses
     for f in dashboard/statuses/*; do
       if ! test -f /var/$f; then
         cp $f /var/dashboard/statuses
       fi
     done
     
-    for f in dashboard/logs/*; do
-      if ! test -f /var/$f; then
-        cp $f /var/dashboard/logs
-      fi
-    done
-    
+    # Remove useless files
     rm -rf dashboard/services/*
     rm -rf dashboard/statuses/*
-    rm -rf dashboard/logs/*
     rm nginx/.htpasswd
 
-    systemctl disable helium-status-check.timer
-    rm -rf /etc/systemd/system/helium-status-check.timer
+    if test -f /etc/systemd/system/helium-status-check.timer; then
+      systemctl disable helium-status-check.timer
+      rm -rf /etc/systemd/system/helium-status-check.timer
+    fi
 
     # Remove /etc/ssl/certs/dhparam.pem if it is empty and regenerate it
     [ -s /etc/ssl/certs/dhparam.pem ] || rm -f /etc/ssl/certs/dhparam.pem
