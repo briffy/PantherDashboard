@@ -46,6 +46,14 @@ echo 1193f56 > /var/dashboard/commit-hash
 
 ## Change Log ##
 
+- 0.2.19
+1. Fixed website icon for Panther X2
+2. Add timezone set support
+3. Add current timezone display in the home page
+4. Add witness log display for light hotspot
+5. Add Helium Miner Log Analyzer for light hotspot
+6. Update online status for light hotspot, For light hotspot, it only support 'Not Onboarded', 'Inactive' and 'Active'
+
 - 0.2.18
 1. Add Helium Miner Log Analyzer
 2. Fix miner verison check with quay.io server
