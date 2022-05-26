@@ -117,6 +117,8 @@ function generateStats($beacons) {
 	$startTime = DateTime::createFromFormat('Y-m-d H:i:s',explode('.',$beacons[0]['datetime'])[0]);
 	$endTime = DateTime::createFromFormat('Y-m-d H:i:s',explode('.',end($beacons)['datetime'])[0]);
 	$intervalInHours = ($endTime->getTimestamp() - $startTime->getTimestamp())/3600;
+	// Avoid the divide 0 exception
+	$intervalInHours = $intervalInHours ? $intervalInHours : 1;
 
 	$successful = 0;
 	$failedMaxRetry = 0;
