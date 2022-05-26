@@ -190,7 +190,7 @@ function generateList($beacons) {
             <th>Status</th>
             </tr>';
 
-    foreach ($beacons as $beacon) {
+    foreach (array_reverse($beacons) as $beacon) {
 
         $datetime = DateTime::createFromFormat('Y-m-d H:i:s.u',$beacon['datetime'], new DateTimeZone( 'UTC' ));
         $datetime->setTimezone($systemDate->getTimezone());
