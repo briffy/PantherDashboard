@@ -118,7 +118,7 @@ body .closeable_prompt_overlay #closeable_prompt #prompt_body p {
 	margin: 0 0 20px 0;	
 }
 
-body .closeable_prompt_overlay #closeable_prompt #prompt_footer #reset_password_button, #set_wifi_button {
+body .closeable_prompt_overlay #closeable_prompt #prompt_footer #reset_password_button, #set_wifi_button, #set_timezone_prompt_button {
 	width: 60px;
 	height: 30px;
 	position: relative;
@@ -248,7 +248,7 @@ body .closeable_prompt_overlay #closeable_prompt select option {
 }
 
 #main #content #toggle_buttons .enabled {
-	border-color: rgba(255, 255, 255, 0.8);
+	border-color: rgba(44, 255, 0, 0.8);
 }
 
 #main #content #toggle_buttons .disabled {
@@ -347,7 +347,7 @@ header #power_container a:hover {
 	width: 64px;
 	padding: 5px;
 	float: left;
-	margin: 0 20px 0 0;
+	margin: 0 20px 10px 0;
 	background-color: rgba(255,255,255,0.2);
 	border-radius: 10px;
 	box-shadow: 1px 1px #000000;
@@ -400,6 +400,11 @@ header #power_container a:hover {
 	font-size: 48px;
 	display: block;
 	animation: syncing 2s infinite;
+}
+
+#main #content #tools_buttons ul li#set_timezone_button .icon-time {
+	font-size: 48px;
+	display: block;
 }
 
 #main #content #tools_buttons ul li#fast_sync_button_disabled:hover {

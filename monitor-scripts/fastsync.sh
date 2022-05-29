@@ -10,6 +10,6 @@ if [[ $service == 'running' ]]; then
   sync_state=$(docker exec helium-miner miner repair sync_state)
   if [[ $sync_state != 'sync active' ]]; then
     docker exec helium-miner miner repair sync_resume
-    echo 'stopped' > /var/dashboard/services/fastsync
   fi
+  echo 'stopped' > /var/dashboard/services/fastsync
 fi

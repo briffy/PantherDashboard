@@ -3,11 +3,11 @@ if((isset($_POST['SSID']) && isset($_POST['password']) && isset($_POST['country'
 {
 $config = "ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev\n
 update_config=1
-country=".$_POST['country']."
+country=".trim(html_entity_decode($_POST['country']))."
 
 network={
-	ssid=\"".$_POST['SSID']."\"
-	psk=\"".$_POST['password']."\"
+	ssid=\"".trim(html_entity_decode($_POST['SSID']))."\"
+	psk=\"".trim(html_entity_decode($_POST['password']))."\"
 	scan_ssid=1
 }\n";
 	$file = fopen("/var/dashboard/wifi_config", "w");

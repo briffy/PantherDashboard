@@ -1,4 +1,7 @@
-<h1>Panther X1 Miner Dashboard - Tools</h1>
+<?php
+$info['PantherXVer'] = trim(file_get_contents("/var/dashboard/statuses/pantherx_ver"));
+?>
+<h1>Panther <?php echo $info['PantherXVer']; ?> Miner Dashboard - Tools</h1>
 
 <div id="tools_buttons">
 	<ul>
@@ -52,6 +55,13 @@
 			<a href="#" onclick="ClearBlockChainPrompt();" title="Clear BlockChain Data">
 				<span class="icon-warning"></span>
 				<span class="button_title">Clear BlockChain Data</span>
+			</a>
+		</li>
+
+		<li id="set_timezone_button">
+			<a href="#" onclick="SetTimezonePrompt();" title="Set Timezone">
+				<span class="icon-time"></span>
+				<span class="button_title">Set Timezone</span>
 			</a>
 		</li>
 	</ul>

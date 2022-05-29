@@ -1,0 +1,10 @@
+[Unit]
+Description=Run the pantherx watchdog every 10 minutes.
+
+[Timer]
+OnBootSec=600
+OnUnitActiveSec=600
+AccuracySec=1ms
+
+[Install]
+WantedBy=timers.target

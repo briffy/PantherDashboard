@@ -9,6 +9,15 @@ $info['Version'] = trim(file_get_contents("/var/dashboard/version"));
 $info['Update'] = trim(file_get_contents("/var/dashboard/update"));
 $info['MinerVersion'] = trim(file_get_contents('/var/dashboard/statuses/current_miner_version'));
 $info['LatestMinerVersion'] = trim(file_get_contents('/var/dashboard/statuses/latest_miner_version'));
+$info['PantherXVer'] = trim(file_get_contents("/var/dashboard/statuses/pantherx_ver"));
+$info['FirmwareVersion'] = trim(file_get_contents("/etc/ota_version"));
+if (file_exists('/opt/panther-x2/data/SN')) {
+    $info['PantherXSN'] = trim(file_get_contents("/opt/panther-x2/data/SN"));
+}
+else
+{
+    $info['PantherXSN'] = 'Unknown';
+}
 
 if (empty($info['CurrentBlockHeight']))
 {
@@ -31,14 +40,23 @@ else
 <link rel="stylesheet" href="css/common.css" />
 <link rel="stylesheet" href="css/fonts.css" />
 <link rel="stylesheet" href="css/hack.css" />
+<script src="js/jquery-2.1.4.min.js"></script>
 <script src="js/functions.js"></script>
-<title>Panther X1 Miner Dashboard</title>
+<?php
+if ($info['PantherXVer'] == 'X1') {
+    echo '<link rel="shortcut icon" href="favicon-x1.ico" type="image/x-icon" />';
+} elseif ($info['PantherXVer'] == 'X2') {
+    echo '<link rel="shortcut icon" href="favicon-x2.ico" type="image/x-icon" />';
+}
+?>
+
+<title>Panther <?php echo $info['PantherXVer']; ?> Miner Dashboard</title>
 </head>
 
 <body>
 	<header>
 		<div id="logo_container">
-			<a href="/index.php" title="Home"><img src="images/logo.png" /></a>
+			<a href="/index.php" title="Home"><img src="images/logo-<?php echo strtolower($info['PantherXVer']); ?>.png" /></A>
 		</div>
 
 		<div id="power_container">
@@ -54,7 +72,7 @@ else
 				<li <?php if($page == 'home' || $page == '') { echo 'class="active_page"'; } ?>><a href="/index.php" title="Homepage"><span class="icon-home"></span><span class="text">Home</span></a></li>
 				<li <?php if($page == 'tools') { echo 'class="active_page"'; } ?>><a href="/?page=tools" title="Tools"><span class="icon-wrench"></span><span class="text">Tools</span></a></li>
 				<li <?php if($page == 'info') { echo 'class="active_page"'; } ?>><a href="/?page=info" title="Information"><span class="icon-info"></span><span class="text">Info</span></a></li>
-				<li <?php if($page == 'logs') { echo 'class="active_page"'; } ?>><a href="/?page=logs" title="Logs"><span class="icon-list"></span><span class="text">Logs</span></a></li>
+				<li <?php if($page == 'logs' || $page == 'minerloganalyzer') { echo 'class="active_page"'; } ?>><a href="/?page=logs" title="Logs"><span class="icon-list"></span><span class="text">Logs</span></a></li>
 			</ul>
 
 		</nav>
@@ -98,6 +116,14 @@ else
 					include('/var/dashboard/pages/clearblockchain.php');
 					break;
 
+				case 'minerloganalyzer':
+					// Light version: https://engineering.helium.com/2022/05/10/miner-firmware-hotspot-release.html
+					if ($info['LatestMinerVersion'] != '' && (strcmp($info['LatestMinerVersion'], 'miner-arm64_2022.05.10.0_GA') < 0))
+						include('/var/dashboard/pages/minerloganalyzer.php');
+					else
+						include('/var/dashboard/pages/minerlightloganalyzer.php');
+					break;
+
 				default:
 					include('/var/dashboard/pages/home.php');
 					break;
@@ -110,8 +136,10 @@ else
 				<span class="icon-grid"></span>
 				<h3>BlockChain Info</h3>
 				<ul id="info_height_data">
-					<?php 
-					echo $sync.'<li>Miner Height: '.$info['MinerBlockHeight'].'</li><li>Live Height: '.$info['CurrentBlockHeight'].'</li><li>Online Status: '.$info['OnlineStatus'].'</li>'; ?>
+					<?php echo $sync ?>
+					<li>Miner Height: <span id="miner_height">Loading</span></li>
+					<li>Live Height: <span id="live_height">Loading</span></li>
+					<li>Online Status: <span id="online_status">Loading</span></li>
 				</ul>
 			</div>
 
@@ -123,17 +151,21 @@ else
 		</section>
 
 		<footer>
-			<a href="https://github.com/briffy/PantherDashboard">Dashboard</a> Version: <?php echo $info['Version'];
+			<a href="https://github.com/Panther-X/PantherDashboard">Dashboard</a> Version: <?php echo $info['Version'];
 			if($info['Version'] != $info['Update'])
 			{
-				echo ' - <a href="https://github.com/briffy/PantherDashboard" title="Update Releases">Update Available - '.$info['Update'].'</a>';
+				echo ' - <a href="/index.php?page=updatedashboard" title="Update Releases">Update Available - '.$info['Update'].'</a>';
 			}
 			?>
 			<br />Miner Version: <?php echo $info['MinerVersion'];
-			if($info['MinerVersion'] != $info['LatestMinerVersion'])
+			if($info['LatestMinerVersion'] != '' && $info['MinerVersion'] != $info['LatestMinerVersion'])
 			{
-				echo ' - <a href="?tools.php=updateminer">Update Available</a>';
+				echo ' - <a href="/index.php?page=updateminer">Update Available</a>';
 			}
+			?>
+			<br />Panther X Firmware Version: <?php echo $info['FirmwareVersion'];
+			?>
+			<br />Panther X SN: <?php echo $info['PantherXSN'];
 			?>
 		</footer>
 		<br class="clear" />

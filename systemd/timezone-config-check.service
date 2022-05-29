@@ -1,0 +1,5 @@
+[Unit]
+Description=Timezone Config checker
+
+[Service]
+ExecStart=/etc/monitor-scripts/timezone-config.sh

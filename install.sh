@@ -1,26 +1,40 @@
 #!/bin/bash
 rm /tmp/latest.tar.gz
 
+if test -f /var/dashboard/branch; then
+  BRANCH=`cat /var/dashboard/branch`
+else
+  BRANCH='main'
+fi
+
 if test -d /var/dashboard; then
   echo 'Dashboard already installed, running an update...'
-  wget https://raw.githubusercontent.com/briffy/PantherDashboard/main/update.sh -O - | sudo bash
+  wget https://raw.githubusercontent.com/Panther-X/PantherDashboard/${BRANCH}/update.sh -O - | sudo bash
 else
-
   if id -nG admin | grep -qw "sudo"; then
-    wget https://raw.githubusercontent.com/briffy/PantherDashboard/main/latest.tar.gz -O /tmp/latest.tar.gz
+    if test -f /var/dashboard/commit-hash; then
+      VER=`cat /var/dashboard/commit-hash`
+      wget https://codeload.github.com/Panther-X/PantherDashboard/tar.gz/${VER} -O /tmp/latest.tar.gz
+    else
+      wget https://raw.githubusercontent.com/Panther-X/PantherDashboard/${BRANCH}/version -O /tmp/dashboard_latest_ver
+      VER=`cat /tmp/dashboard_latest_ver`
+      wget https://codeload.github.com/Panther-X/PantherDashboard/tar.gz/refs/tags/${VER} -O /tmp/latest.tar.gz
+    fi
     cd /tmp
     if test -f latest.tar.gz; then
-      rm -rf /tmp/dashboardinstall
+      rm -rf /tmp/PantherDashboard-*
     
       tar -xzf latest.tar.gz
-      cd dashboardinstall
+      cd PantherDashboard-${VER}
       apt-get update
       apt-get --assume-yes install nginx php-fpm php7.3-fpm
 
       mkdir /var/dashboard
+      mkdir /var/dashboard/logs
       mkdir /etc/monitor-scripts
 
       cp -r dashboard/* /var/dashboard/
+      cp version /var/dashboard/
       cp monitor-scripts/* /etc/monitor-scripts/
        
       cp nginx/snippets/* /etc/nginx/snippets/
@@ -30,6 +44,8 @@ else
         cp nginx/.htpasswd /var/dashboard/.htpasswd
       fi
     
+      # Remove /etc/ssl/certs/dhparam.pem if it is empty
+      [ -s /etc/ssl/certs/dhparam.pem ] || rm -f /etc/ssl/certs/dhparam.pem
       if ! test -f /etc/ssl/certs/dhparam.pem; then
         openssl dhparam -out /etc/ssl/certs/dhparam.pem 2048 
       fi
@@ -51,7 +67,9 @@ else
       chmod 775 /var/dashboard/.htpasswd
       chown root:www-data /var/dashboard
       chmod 775 /var/dashboard
+      chmod 775 /var/dashboard/logs
 
+      bash /etc/monitor-scripts/pantherx-ver-check.sh
       FILES="systemd/*.timer"
       for f in $FILES;
       do
