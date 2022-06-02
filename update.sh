@@ -35,16 +35,18 @@ if id -nG admin | grep -qw "sudo"; then
     mkdir -p /var/log/packet-forwarder/
 
     # Add the new services
+    mkdir -p /var/dashboard/services
     for f in dashboard/services/*; do
       if ! test -s /var/$f; then
-        cp $f /var/dashboard/services
+        cp $f /var/dashboard/services/
       fi
     done
     
     # Add the new statuses
+    mkdir -p /var/dashboard/statuses
     for f in dashboard/statuses/*; do
       if ! test -f /var/$f; then
-        cp $f /var/dashboard/statuses
+        cp $f /var/dashboard/statuses/
       fi
     done
     
