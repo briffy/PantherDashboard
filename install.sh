@@ -29,6 +29,10 @@ else
       apt-get update
       apt-get --assume-yes install nginx php-fpm php7.3-fpm
 
+      # Remove it first if the /var/dashboard is invalid
+      if test -e /var/dashboard; then
+        rm -f /var/dashboard
+      fi
       mkdir -p /var/dashboard
       mkdir -p /var/dashboard/logs
       mkdir -p /etc/monitor-scripts
