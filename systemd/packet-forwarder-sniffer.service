@@ -1,0 +1,13 @@
+[Unit]
+Description=Packet Forwarder sniffer
+
+[Service]
+User=root
+WorkingDirectory=/root
+ExecStart=/etc/monitor-scripts/packet-forwarder-sniffer.sh
+StandardOutput=file:/var/log/packet-forwarder/packet_forwarder.log
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+

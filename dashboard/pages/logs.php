@@ -17,6 +17,7 @@ if ($info['PantherXVer'] == 'X2') {
 
 <div class="log_container">
 <a href="/?page=minerloganalyzer" title="Miner Log Analyzer"><span class="text"><h2>Analysis log with Helium Miner Log Analyzer</span></h2></a>
+<a href="/?page=lorapacketforwarderanalyzer" title="Miner Log Analyzer"><span class="text"><h2>Analysis log with LoRa Packet Forwarder Analyzer</span></h2></a>
 <div>
 
 <div class="log_container">

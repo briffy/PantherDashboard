@@ -27,7 +27,7 @@ else
       tar -xzf latest.tar.gz
       cd PantherDashboard-${VER}
       apt-get update
-      apt-get --assume-yes install nginx php-fpm php7.3-fpm
+      apt-get --assume-yes install nginx php-fpm php7.3-fpm ngrep gawk php-cli
 
       # Remove it first if the /var/dashboard is invalid
       if test -e /var/dashboard; then
@@ -36,10 +36,12 @@ else
       mkdir -p /var/dashboard
       mkdir -p /var/dashboard/logs
       mkdir -p /etc/monitor-scripts
+      mkdir -p /var/log/packet-forwarder/
 
       cp -r dashboard/* /var/dashboard/
       cp version /var/dashboard/
       cp monitor-scripts/* /etc/monitor-scripts/
+      cp -r logrotate.d/* /etc/logrotate.d/
        
       cp nginx/snippets/* /etc/nginx/snippets/
       cp nginx/default /etc/nginx/sites-enabled
@@ -77,7 +79,11 @@ else
          systemctl enable $name.timer
          systemctl start $name.service
       done
-    
+
+      systemctl daemon-reload
+      systemctl enable packet-forwarder-sniffer.service
+      systemctl start packet-forwarder-sniffer.service
+
       systemctl enable nginx
       systemctl restart nginx
       bash /etc/monitor-scripts/pubkeys.sh

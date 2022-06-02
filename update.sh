@@ -26,21 +26,13 @@ if id -nG admin | grep -qw "sudo"; then
     tar -xzf latest.tar.gz
     cd PantherDashboard-${VER}
 
-    php_stat=`pgrep php`
-    if  [ -z "$php_stat" ]; then
-      apt update
-      apt-get --assume-yes install php-fpm php7.3-fpm
-    fi
-
-    nginx_stat=`pgrep nginx`
-    if [ -z "$nginx_stat" ]; then
-      apt update
-      apt-get --assume-yes install nginx
-    fi
+    apt-get update
+    apt-get --assume-yes install nginx php-fpm php7.3-fpm ngrep gawk php-cli
 
     mkdir -p /var/dashboard
     mkdir -p /var/dashboard/logs
     mkdir -p /etc/monitor-scripts
+    mkdir -p /var/log/packet-forwarder/
 
     # Add the new services
     for f in dashboard/services/*; do
@@ -79,6 +71,7 @@ if id -nG admin | grep -qw "sudo"; then
     fi
 
     cp monitor-scripts/* /etc/monitor-scripts/   
+    cp -r logrotate.d/* /etc/logrotate.d/
     cp -r dashboard/* /var/dashboard/
     cp version /var/dashboard/
     cp systemd/* /etc/systemd/system/
@@ -102,6 +95,11 @@ if id -nG admin | grep -qw "sudo"; then
         systemctl start $name.service >> /var/dashboard/logs/dashboard-update.log
         systemctl daemon-reload >> /var/dashboard/logs/dashboard-update.log
       done
+
+    systemctl daemon-reload
+    systemctl enable packet-forwarder-sniffer.service
+    systemctl start packet-forwarder-sniffer.service
+
     systemctl restart nginx
     bash /etc/monitor-scripts/pubkeys.sh
     echo 'Success.' >> /var/dashboard/logs/dashboard-update.log
