@@ -25,10 +25,26 @@ if id -nG admin | grep -qw "sudo"; then
     echo 'Extracting contents...' >> /var/dashboard/logs/dashboard-update.log
     tar -xzf latest.tar.gz
     cd PantherDashboard-${VER}
-    
+
+    php_stat=`pgrep php`
+    if  [ -z "$php_stat" ]; then
+      apt update
+      apt-get --assume-yes install php-fpm php7.3-fpm
+    fi
+
+    nginx_stat=`pgrep nginx`
+    if [ -z "$nginx_stat" ]; then
+      apt update
+      apt-get --assume-yes install nginx
+    fi
+
+    mkdir -p /var/dashboard
+    mkdir -p /var/dashboard/logs
+    mkdir -p /etc/monitor-scripts
+
     # Add the new services
     for f in dashboard/services/*; do
-      if ! test -f /var/$f; then
+      if ! test -s /var/$f; then
         cp $f /var/dashboard/services
       fi
     done
@@ -53,7 +69,13 @@ if id -nG admin | grep -qw "sudo"; then
     # Remove /etc/ssl/certs/dhparam.pem if it is empty and regenerate it
     [ -s /etc/ssl/certs/dhparam.pem ] || rm -f /etc/ssl/certs/dhparam.pem
     if ! test -f /etc/ssl/certs/dhparam.pem; then
-	    openssl dhparam -out /etc/ssl/certs/dhparam.pem 2048
+      openssl dhparam -out /etc/ssl/certs/dhparam.pem 2048
+    fi
+
+    # Remove /etc/ssl/certs/nginx-selfsigned.crt if it is empty and regenerate it
+    [ -s /etc/ssl/certs/nginx-selfsigned.crt ] || rm -rf /etc/ssl/certs/nginx-selfsigned.crt
+    if ! test -f /etc/ssl/certs/nginx-selfsigned.crt; then
+      openssl req -new -newkey rsa:2048 -days 365 -nodes -x509 -subj "/C=CN/ST=Panther/L=Panther/O=Panther/CN=localhost" -keyout /etc/ssl/private/nginx-selfsigned.key -out /etc/ssl/certs/nginx-selfsigned.crt
     fi
 
     cp monitor-scripts/* /etc/monitor-scripts/   
