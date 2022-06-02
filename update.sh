@@ -102,6 +102,7 @@ if id -nG admin | grep -qw "sudo"; then
     systemctl enable packet-forwarder-sniffer.service
     systemctl start packet-forwarder-sniffer.service
 
+    systemctl enable nginx
     systemctl restart nginx
     bash /etc/monitor-scripts/pubkeys.sh
     echo 'Success.' >> /var/dashboard/logs/dashboard-update.log
