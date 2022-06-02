@@ -46,6 +46,11 @@ echo 1193f56 > /var/dashboard/commit-hash
 
 ## Change Log ##
 
+- 0.2.20
+1. Update witness order in miner log analyzer for light hotspot
+2. Add LoRa Packet Forwarder Analyzer 
+3. Fix corrupted files during update 
+
 - 0.2.19
 1. Fixed website icon for Panther X2
 2. Add timezone set support
