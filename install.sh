@@ -29,9 +29,9 @@ else
       apt-get update
       apt-get --assume-yes install nginx php-fpm php7.3-fpm
 
-      mkdir /var/dashboard
-      mkdir /var/dashboard/logs
-      mkdir /etc/monitor-scripts
+      mkdir -p /var/dashboard
+      mkdir -p /var/dashboard/logs
+      mkdir -p /etc/monitor-scripts
 
       cp -r dashboard/* /var/dashboard/
       cp version /var/dashboard/
