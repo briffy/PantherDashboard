@@ -79,6 +79,8 @@ if id -nG admin | grep -qw "sudo"; then
 
     cp monitor-scripts/* /etc/monitor-scripts/   
     cp -r logrotate.d/* /etc/logrotate.d/
+    cp nginx/snippets/* /etc/nginx/snippets/
+    cp nginx/default /etc/nginx/sites-enabled/
     cp -r dashboard/* /var/dashboard/
     cp version /var/dashboard/
     cp systemd/* /etc/systemd/system/
@@ -87,6 +89,10 @@ if id -nG admin | grep -qw "sudo"; then
     chown root:www-data /var/dashboard/statuses/*
     chmod 775 /var/dashboard/services/*
     chmod 775 /var/dashboard/statuses/*
+    chown root:root /etc/ssl/private/nginx-selfsigned.key
+    chmod 600 /etc/ssl/private/nginx-selfsigned.key
+    chown root:root /etc/ssl/certs/nginx-selfsigned.crt
+    chmod 777 /etc/ssl/certs/nginx-selfsigned.crt
     chown root:www-data /var/dashboard
     chmod 775 /var/dashboard
 
