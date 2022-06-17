@@ -46,6 +46,11 @@ echo 1193f56 > /var/dashboard/commit-hash
 
 ## Change Log ##
 
+- 0.2.21
+1. Fix json_decode failed when run the LoRa Packet Forwarder Analyzer
+2. Fix missing nginx configurations when update dashboard
+3. Update timezone option display
+
 - 0.2.20
 1. Update witness order in miner log analyzer for light hotspot
 2. Add LoRa Packet Forwarder Analyzer 
