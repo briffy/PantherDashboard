@@ -58,7 +58,6 @@ if id -nG admin | grep -qw "sudo"; then
     # Remove useless files
     rm -rf dashboard/services/*
     rm -rf dashboard/statuses/*
-    rm nginx/.htpasswd
 
     if test -f /etc/systemd/system/helium-status-check.timer; then
       systemctl disable helium-status-check.timer
@@ -81,9 +80,15 @@ if id -nG admin | grep -qw "sudo"; then
     cp -r logrotate.d/* /etc/logrotate.d/
     cp nginx/snippets/* /etc/nginx/snippets/
     cp nginx/default /etc/nginx/sites-enabled/
+
+    # Fix invalid password
+    [ -s /var/dashboard/.htpasswd ] || cp nginx/.htpasswd /var/dashboard/.htpasswd
+    rm nginx/.htpasswd
+
     cp -r dashboard/* /var/dashboard/
     cp version /var/dashboard/
     cp systemd/* /etc/systemd/system/
+
     chmod 755 /etc/monitor-scripts/*
     chown root:www-data /var/dashboard/services/*
     chown root:www-data /var/dashboard/statuses/*
@@ -93,6 +98,8 @@ if id -nG admin | grep -qw "sudo"; then
     chmod 600 /etc/ssl/private/nginx-selfsigned.key
     chown root:root /etc/ssl/certs/nginx-selfsigned.crt
     chmod 777 /etc/ssl/certs/nginx-selfsigned.crt
+    chown root:www-data /var/dashboard/.htpasswd
+    chmod 775 /var/dashboard/.htpasswd
     chown root:www-data /var/dashboard
     chmod 775 /var/dashboard
 
