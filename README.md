@@ -46,6 +46,10 @@ echo 1193f56 > /var/dashboard/commit-hash
 
 ## Change Log ##
 
+- 0.2.22
+1. Fix login failed with default user and password when first open dashboard
+2. Fix miner version check failed
+
 - 0.2.21
 1. Fix json_decode failed when run the LoRa Packet Forwarder Analyzer
 2. Fix missing nginx configurations when update dashboard
