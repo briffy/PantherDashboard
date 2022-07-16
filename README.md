@@ -46,6 +46,11 @@ echo 1193f56 > /var/dashboard/commit-hash
 
 ## Change Log ##
 
+- 0.2.23
+1. Remove display for miner's local height
+2. Remove fastsync
+3. Update peer list to peer session aka DNS seed
+
 - 0.2.22
 1. Fix login failed with default user and password when first open dashboard
 2. Fix miner version check failed
