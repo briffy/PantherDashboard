@@ -13,9 +13,8 @@
 			$online_status = 'active';
 		}
 	}
-	$miner_height = trim(file_get_contents("/var/dashboard/statuses/infoheight"));
 
 	header('Content-Type:application/json; charset=utf-8');
 
-	echo '{"live_height":"'.$live_height.'","online_status":"'.ucwords($online_status).'","miner_height":"'.$miner_height.'"}';
+	echo '{"live_height":"'.$live_height.'","online_status":"'.ucwords($online_status).'"}';
 ?>

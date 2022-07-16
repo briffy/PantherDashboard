@@ -64,6 +64,13 @@ if id -nG admin | grep -qw "sudo"; then
       rm -rf /etc/systemd/system/helium-status-check.timer
     fi
 
+    if test -f /etc/systemd/system/infoheight-check.timer; then
+      systemctl disable infoheight-check.timer
+      systemctl disable infoheight-check.service
+      rm -rf /etc/systemd/system/infoheight-check.timer
+      rm -rf /etc/systemd/system/infoheight-check.service
+    fi
+
     # Remove /etc/ssl/certs/dhparam.pem if it is empty and regenerate it
     [ -s /etc/ssl/certs/dhparam.pem ] || rm -f /etc/ssl/certs/dhparam.pem
     if ! test -f /etc/ssl/certs/dhparam.pem; then

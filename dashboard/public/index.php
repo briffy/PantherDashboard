@@ -4,7 +4,6 @@ $info['AnimalName'] = trim(file_get_contents("/var/dashboard/statuses/animal_nam
 $info['PubKey'] = trim(file_get_contents("/var/dashboard/statuses/pubkey"));
 $info['OnlineStatus'] = trim(file_get_contents("/var/dashboard/statuses/online_status"));
 $info['CurrentBlockHeight'] = trim(file_get_contents("/var/dashboard/statuses/current_blockheight"));
-$info['MinerBlockHeight'] = trim(file_get_contents("/var/dashboard/statuses/infoheight"));
 $info['Version'] = trim(file_get_contents("/var/dashboard/version"));
 $info['Update'] = trim(file_get_contents("/var/dashboard/update"));
 $info['MinerVersion'] = trim(file_get_contents('/var/dashboard/statuses/current_miner_version'));
@@ -19,18 +18,7 @@ else
     $info['PantherXSN'] = 'Unknown';
 }
 
-if (empty($info['CurrentBlockHeight']))
-{
-        $sync = '<li><p style="color:#FE2D00">Helium API Error</p></li><br />';
-}
-elseif(($info['CurrentBlockHeight'] - $info['MinerBlockHeight']) <= 20)
-{
-        $sync = '<li><p style="color:#2BFF97">Fully Synced</p></li><br />';
-}
-else
-{
-        $sync = '<li><p style="color:yellow">Syncing</p></li><br />';
-}
+$sync = '<li><p style="color:#2BFF97">Fully Synced</p></li><br />';
 ?>
 <!DOCTYPE html>
 <html>
@@ -141,7 +129,6 @@ if ($info['PantherXVer'] == 'X1') {
 				<h3>BlockChain Info</h3>
 				<ul id="info_height_data">
 					<?php echo $sync ?>
-					<li>Miner Height: <span id="miner_height">Loading</span></li>
 					<li>Live Height: <span id="live_height">Loading</span></li>
 					<li>Online Status: <span id="online_status">Loading</span></li>
 				</ul>
