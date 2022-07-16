@@ -38,10 +38,5 @@ switch($action)
 		$file = fopen('/var/dashboard/services/auto-update', 'w');
 		fwrite($file, "enabled\n");
 	break;
-
-	case 'FastSync':
-		$file = fopen('/var/dashboard/services/fastsync', 'w');
-		fwrite($file, "start\n");
-	break;
 }
 ?> 

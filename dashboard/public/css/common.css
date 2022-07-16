@@ -365,11 +365,6 @@ header #power_container a:hover {
 	height: 84px;
 }
 
-#main #content #tools_buttons ul li#fast_sync_button .icon-loop2 {
-	font-size: 48px;
-	display: block;
-}
-
 #main #content #tools_buttons ul li#password_reset_button .icon-key {
 	font-size: 48px;
 	display: block;
@@ -395,26 +390,10 @@ header #power_container a:hover {
 	display: block;
 }
 
-
-#main #content #tools_buttons ul li#fast_sync_button_disabled .icon-loop2 {
-	font-size: 48px;
-	display: block;
-	animation: syncing 2s infinite;
-}
-
 #main #content #tools_buttons ul li#set_timezone_button .icon-time {
 	font-size: 48px;
 	display: block;
 }
-
-#main #content #tools_buttons ul li#fast_sync_button_disabled:hover {
-	box-shadow: 1px 1px black;
-}
-
-#main #content #tools_buttons ul li#fast_sync_button_disabled a:hover {
-	cursor: default;
-}
-
 
 #main #content #tools_buttons ul li .button_title {
 	padding: 10px 0 0 0;

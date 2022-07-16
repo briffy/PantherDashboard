@@ -10,15 +10,6 @@ function EnableService(ServiceName)
 	httpRequest = new XMLHttpRequest();
 	httpRequest.open('GET', 'EnableService.php?action='+ServiceName, true);
 	httpRequest.send();
-
-	if(ServiceName == 'FastSync')
-	{
-		httpRequest.onreadystatechange = function() {
-			if(httpRequest.readyState == 4 && httpRequest.status == 200) {
-				location.reload();
-			}
-		}
-	}
 }
 
 function RebootDevice()

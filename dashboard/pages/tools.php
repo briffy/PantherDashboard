@@ -5,24 +5,6 @@ $info['PantherXVer'] = trim(file_get_contents("/var/dashboard/statuses/pantherx_
 
 <div id="tools_buttons">
 	<ul>
-		<?php
-		$fastsync = trim(shell_exec("cat /var/dashboard/services/fastsync"));
-		if($fastsync == 'stopped')
-		{
-			echo '<li id="fast_sync_button">';
-			echo '<a href="#" onclick="EnableService(\'FastSync\');" title="Fast Sync">';
-		}
-		else
-		{
-			echo '<li id="fast_sync_button_disabled">';
-			echo '<a href="#" title="Fast Sync in progress">';
-		}
-		?>
-		<span class="icon-loop2"></span>
-		<span class="button_title">Fast Sync</span>
-		</a>
-		</li>
-
 		<li id="password_reset_button">
 			<a href="#" onclick="ResetPasswordPrompt();" title="Reset Password">
 				<span class="icon-key"></span>

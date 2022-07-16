@@ -71,6 +71,13 @@ if id -nG admin | grep -qw "sudo"; then
       rm -rf /etc/systemd/system/infoheight-check.service
     fi
 
+    if test -f /etc/systemd/system/fastsync-check.timer; then
+      systemctl disable fastsync-check.timer
+      systemctl disable fastsync-check.service
+      rm -rf /etc/systemd/system/fastsync-check.timer
+      rm -rf /etc/systemd/system/fastsync-check.service
+    fi
+
     # Remove /etc/ssl/certs/dhparam.pem if it is empty and regenerate it
     [ -s /etc/ssl/certs/dhparam.pem ] || rm -f /etc/ssl/certs/dhparam.pem
     if ! test -f /etc/ssl/certs/dhparam.pem; then
