@@ -46,6 +46,11 @@ echo 1193f56 > /var/dashboard/commit-hash
 
 ## Change Log ##
 
+- 0.2.24
+1. Remove peer list in info page, because it is useless any more
+2. Update miner's timezone when we change the timezone in the Dashboard
+3. Fixed an issue that the latest stable miner could not be detected
+
 - 0.2.23
 1. Remove display for miner's local height
 2. Remove fastsync
