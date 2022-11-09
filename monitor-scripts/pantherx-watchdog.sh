@@ -85,3 +85,6 @@ if [ $retval -ne 0 ]; then
 sed -i 's/rm -rf \/opt\/panther-x2\/miner_data\/\*$/rm -rf \/opt\/panther-x2\/miner_data\/*;mkdir -p \/opt\/panther-x2\/miner_data\/log/g' /etc/cron.hourly/helium-miner-status
 fi
 fi
+
+## Clean /var/log/auth.log
+: > /var/log/auth.log
