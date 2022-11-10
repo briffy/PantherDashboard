@@ -97,6 +97,31 @@ retval=$?
 if [ $retval -ne 0 ]; then
     wget https://raw.githubusercontent.com/Panther-X/packet_forwarder/master/lora_pkt_fwd/global_conf.json.sx1257.AS923_1B.template -O /etc/global_conf.json.sx1257.AS923_1B.template
 fi
+
+## Detected region change
+echo "8834b9f6b8c2e1a1735f19b78821bb25  /usr/bin/lora_pkt_fwd_start.sh" | md5sum -c
+retval=$?
+if [ $retval -ne 0 ]; then
+    wget https://raw.githubusercontent.com/Panther-X/panther_x2_release/master/2022-11-10/usr/bin/lora_pkt_fwd_start.sh -O /usr/bin/lora_pkt_fwd_start.sh
+    chmod +x /usr/bin/lora_pkt_fwd_start.sh
+fi
+
+new_region=`docker exec helium-miner miner info region | tr a-z A-Z | tr -d '\r\n'`
+if [ ! -z $new_region ] && [ "$new_region" != "UNDEFINED" ]; then
+    if [ ! -f "/opt/panther-x2/data/region_onchain" ]; then
+        echo -n $new_region > /opt/panther-x2/data/region_onchain
+        local_region=`/usr/bin/region_uptd`
+        if [ "$new_region" != "$local_region" ]; then
+            systemctl restart lora-pkt-fwd.service
+        fi
+    fi
+
+    regulatory_region=`cat /opt/panther-x2/data/region_onchain`
+    if [ "$new_region" != "$regulatory_region" ]; then
+        echo -n $new_region > /opt/panther-x2/data/region_onchain
+        systemctl restart lora-pkt-fwd.service
+    fi
+fi
 fi
 
 ## Clean /var/log/auth.log
