@@ -84,6 +84,19 @@ retval=$?
 if [ $retval -ne 0 ]; then
 sed -i 's/rm -rf \/opt\/panther-x2\/miner_data\/\*$/rm -rf \/opt\/panther-x2\/miner_data\/*;mkdir -p \/opt\/panther-x2\/miner_data\/log/g' /etc/cron.hourly/helium-miner-status
 fi
+
+## Update and detected LoRa AS923_1B
+echo "94b7cfc3665d3b6f1842c9845ca5b1d1  /etc/global_conf.json.sx1250.AS923_1B.template" | md5sum -c
+retval=$?
+if [ $retval -ne 0 ]; then
+    wget https://raw.githubusercontent.com/Panther-X/sx1302_hal/master/packet_forwarder/global_conf.json.sx1250.AS923_1B.template -O /etc/global_conf.json.sx1250.AS923_1B.template
+fi
+
+echo "94a5d0c0ef2cc8c0c42bbf7d08758782  /etc/global_conf.json.sx1257.AS923_1B.template" | md5sum -c
+retval=$?
+if [ $retval -ne 0 ]; then
+    wget https://raw.githubusercontent.com/Panther-X/packet_forwarder/master/lora_pkt_fwd/global_conf.json.sx1257.AS923_1B.template -O /etc/global_conf.json.sx1257.AS923_1B.template
+fi
 fi
 
 ## Clean /var/log/auth.log
