@@ -46,6 +46,12 @@ echo 1193f56 > /var/dashboard/commit-hash
 
 ## Change Log ##
 
+- 0.2.25
+1. Add LoRa AS923_1B region support
+2. Update local region with blockchain region var
+3. Fix the log size of the LoRa packet forwarder analyzer too large
+4. Fix /var/log/auth.log too large
+
 - 0.2.24
 1. Remove peer list in info page, because it is useless any more
 2. Update miner's timezone when we change the timezone in the Dashboard
