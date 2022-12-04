@@ -1,0 +1,5 @@
+[Unit]
+Description=Server detection checker
+
+[Service]
+ExecStart=/etc/monitor-scripts/server-detection.sh
