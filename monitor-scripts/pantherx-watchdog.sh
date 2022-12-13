@@ -98,6 +98,19 @@ if [ $retval -ne 0 ]; then
     wget https://raw.githubusercontent.com/Panther-X/packet_forwarder/master/lora_pkt_fwd/global_conf.json.sx1257.AS923_1B.template -O /etc/global_conf.json.sx1257.AS923_1B.template
 fi
 
+## Detected and update LoRa AS923_1
+echo "94abda56828084b5596a8361366b81e4  /etc/global_conf.json.sx1250.AS923_1.template" | md5sum -c
+retval=$?
+if [ $retval -ne 0 ]; then
+    wget https://raw.githubusercontent.com/Panther-X/sx1302_hal/master/packet_forwarder/global_conf.json.sx1250.AS923_1.template -O /etc/global_conf.json.sx1250.AS923_1.template
+fi
+
+echo "7accef69baebbcf89eb85d620fb9ce9a  /etc/global_conf.json.sx1257.AS923_1.template" | md5sum -c
+retval=$?
+if [ $retval -ne 0 ]; then
+    wget https://raw.githubusercontent.com/Panther-X/packet_forwarder/master/lora_pkt_fwd/global_conf.json.sx1257.AS923_1.template -O /etc/global_conf.json.sx1257.AS923_1.template
+fi
+
 ## Detected region change
 echo "8834b9f6b8c2e1a1735f19b78821bb25  /usr/bin/lora_pkt_fwd_start.sh" | md5sum -c
 retval=$?
