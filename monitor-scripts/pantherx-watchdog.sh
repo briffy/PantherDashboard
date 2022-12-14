@@ -111,6 +111,123 @@ if [ $retval -ne 0 ]; then
     wget https://raw.githubusercontent.com/Panther-X/packet_forwarder/master/lora_pkt_fwd/global_conf.json.sx1257.AS923_1.template -O /etc/global_conf.json.sx1257.AS923_1.template
 fi
 
+## Detected and update LoRa AS923_2
+echo "0c1c63411b7b2f70bc6b49f0b205b067  /etc/global_conf.json.sx1250.AS923_2.template" | md5sum -c
+retval=$?
+if [ $retval -ne 0 ]; then
+    wget https://raw.githubusercontent.com/Panther-X/sx1302_hal/master/packet_forwarder/global_conf.json.sx1250.AS923_2.template -O /etc/global_conf.json.sx1250.AS923_2.template
+fi
+
+echo "747d46380e3063db368346438c9c425e  /etc/global_conf.json.sx1257.AS923_2.template" | md5sum -c
+retval=$?
+if [ $retval -ne 0 ]; then
+    wget https://raw.githubusercontent.com/Panther-X/packet_forwarder/master/lora_pkt_fwd/global_conf.json.sx1257.AS923_2.template -O /etc/global_conf.json.sx1257.AS923_2.template
+fi
+
+## Detected and update LoRa AS923_3
+echo "54510a04ed2bbb19fca896bade0164ae  /etc/global_conf.json.sx1250.AS923_3.template" | md5sum -c
+retval=$?
+if [ $retval -ne 0 ]; then
+    wget https://raw.githubusercontent.com/Panther-X/sx1302_hal/master/packet_forwarder/global_conf.json.sx1250.AS923_3.template -O /etc/global_conf.json.sx1250.AS923_3.template
+fi
+
+echo "a806ec9c59ec7a1291b0190ab110d3a6  /etc/global_conf.json.sx1257.AS923_3.template" | md5sum -c
+retval=$?
+if [ $retval -ne 0 ]; then
+    wget https://raw.githubusercontent.com/Panther-X/packet_forwarder/master/lora_pkt_fwd/global_conf.json.sx1257.AS923_3.template -O /etc/global_conf.json.sx1257.AS923_3.template
+fi
+
+## Detected and update LoRa AS923_4
+echo "8779558279e3900280bd73e7f20aa868  /etc/global_conf.json.sx1250.AS923_4.template" | md5sum -c
+retval=$?
+if [ $retval -ne 0 ]; then
+    wget https://raw.githubusercontent.com/Panther-X/sx1302_hal/master/packet_forwarder/global_conf.json.sx1250.AS923_4.template -O /etc/global_conf.json.sx1250.AS923_4.template
+fi
+
+echo "036739073297d322f47b2713e24b41ca  /etc/global_conf.json.sx1257.AS923_4.template" | md5sum -c
+retval=$?
+if [ $retval -ne 0 ]; then
+    wget https://raw.githubusercontent.com/Panther-X/packet_forwarder/master/lora_pkt_fwd/global_conf.json.sx1257.AS923_4.template -O /etc/global_conf.json.sx1257.AS923_4.template
+fi
+
+## Detected and update LoRa AU915
+echo "15d69e0a08704c9641f64ad44d45255b  /etc/global_conf.json.sx1250.AU915.template" | md5sum -c
+retval=$?
+if [ $retval -ne 0 ]; then
+    wget https://raw.githubusercontent.com/Panther-X/sx1302_hal/master/packet_forwarder/global_conf.json.sx1250.AU915.template -O /etc/global_conf.json.sx1250.AU915.template
+fi
+
+echo "fef8a82b5d043df36c782a988b4f40ef  /etc/global_conf.json.sx1257.AU915.template" | md5sum -c
+retval=$?
+if [ $retval -ne 0 ]; then
+    wget https://raw.githubusercontent.com/Panther-X/packet_forwarder/master/lora_pkt_fwd/global_conf.json.sx1257.AU915.template -O /etc/global_conf.json.sx1257.AU915.template
+fi
+
+## Detected and update LoRa EU868
+echo "1bbc785bdfed48b6a6ff208a42c68670  /etc/global_conf.json.sx1250.EU868.template" | md5sum -c
+retval=$?
+if [ $retval -ne 0 ]; then
+    wget https://raw.githubusercontent.com/Panther-X/sx1302_hal/master/packet_forwarder/global_conf.json.sx1250.EU868.template -O /etc/global_conf.json.sx1250.EU868.template
+fi
+
+echo "43999259b016d29954f715d82ad4ec42  /etc/global_conf.json.sx1257.EU868.template" | md5sum -c
+retval=$?
+if [ $retval -ne 0 ]; then
+    wget https://raw.githubusercontent.com/Panther-X/packet_forwarder/master/lora_pkt_fwd/global_conf.json.sx1257.EU868.template -O /etc/global_conf.json.sx1257.EU868.template
+fi
+
+## Detected and update LoRa IN865
+echo "e54c42c116b9752ea5582d6ddf197707  /etc/global_conf.json.sx1250.IN865.template" | md5sum -c
+retval=$?
+if [ $retval -ne 0 ]; then
+    wget https://raw.githubusercontent.com/Panther-X/sx1302_hal/master/packet_forwarder/global_conf.json.sx1250.IN865.template -O /etc/global_conf.json.sx1250.IN865.template
+fi
+
+echo "f52720877671c007b7c94b9560186991  /etc/global_conf.json.sx1257.IN865.template" | md5sum -c
+retval=$?
+if [ $retval -ne 0 ]; then
+    wget https://raw.githubusercontent.com/Panther-X/packet_forwarder/master/lora_pkt_fwd/global_conf.json.sx1257.IN865.template -O /etc/global_conf.json.sx1257.IN865.template
+fi
+
+## Detected and update LoRa KR920
+echo "41619194a7df001868eeadf21622df8e  /etc/global_conf.json.sx1250.KR920.template" | md5sum -c
+retval=$?
+if [ $retval -ne 0 ]; then
+    wget https://raw.githubusercontent.com/Panther-X/sx1302_hal/master/packet_forwarder/global_conf.json.sx1250.KR920.template -O /etc/global_conf.json.sx1250.KR920.template
+fi
+
+echo "0632f122c1d037233c09fd272cefca22  /etc/global_conf.json.sx1257.KR920.template" | md5sum -c
+retval=$?
+if [ $retval -ne 0 ]; then
+    wget https://raw.githubusercontent.com/Panther-X/packet_forwarder/master/lora_pkt_fwd/global_conf.json.sx1257.KR920.template -O /etc/global_conf.json.sx1257.KR920.template
+fi
+
+## Detected and update LoRa RU864
+echo "5ad237d59a9f331bf276cf330e63edda  /etc/global_conf.json.sx1250.RU864.template" | md5sum -c
+retval=$?
+if [ $retval -ne 0 ]; then
+    wget https://raw.githubusercontent.com/Panther-X/sx1302_hal/master/packet_forwarder/global_conf.json.sx1250.RU864.template -O /etc/global_conf.json.sx1250.RU864.template
+fi
+
+echo "e95bb2752bf17e4335961a36819e87db  /etc/global_conf.json.sx1257.RU864.template" | md5sum -c
+retval=$?
+if [ $retval -ne 0 ]; then
+    wget https://raw.githubusercontent.com/Panther-X/packet_forwarder/master/lora_pkt_fwd/global_conf.json.sx1257.RU864.template -O /etc/global_conf.json.sx1257.RU864.template
+fi
+
+## Detected and update LoRa US915
+echo "3c76acab27b550869be89b03e467307e  /etc/global_conf.json.sx1250.US915.template" | md5sum -c
+retval=$?
+if [ $retval -ne 0 ]; then
+    wget https://raw.githubusercontent.com/Panther-X/sx1302_hal/master/packet_forwarder/global_conf.json.sx1250.US915.template -O /etc/global_conf.json.sx1250.US915.template
+fi
+
+echo "8826d6b14102ebf54c3dbeea24a1dfee  /etc/global_conf.json.sx1257.US915.template" | md5sum -c
+retval=$?
+if [ $retval -ne 0 ]; then
+    wget https://raw.githubusercontent.com/Panther-X/packet_forwarder/master/lora_pkt_fwd/global_conf.json.sx1257.US915.template -O /etc/global_conf.json.sx1257.US915.template
+fi
+
 ## Detected region change
 echo "8834b9f6b8c2e1a1735f19b78821bb25  /usr/bin/lora_pkt_fwd_start.sh" | md5sum -c
 retval=$?
