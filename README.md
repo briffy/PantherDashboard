@@ -46,6 +46,11 @@ echo 1193f56 > /var/dashboard/commit-hash
 
 ## Change Log ##
 
+- 0.2.26
+1. Add network server detection
+2. Fix some AU devices no reward issue
+3. Add LICENSE
+
 - 0.2.25
 1. Add LoRa AS923_1B region support
 2. Update local region with blockchain region var
