@@ -191,10 +191,7 @@ function generateList($beacons) {
             </tr>';
 
     foreach (array_reverse($beacons) as $beacon) {
-
-        $datetime = DateTime::createFromFormat('Y-m-d H:i:s.u',$beacon['datetime'], new DateTimeZone( 'UTC' ));
-        $datetime->setTimezone($systemDate->getTimezone());
-
+        $datetime = new DateTime($beacon['datetime']);
         $rssi = str_pad($beacon['rssi'], 4, " ", STR_PAD_LEFT);
         $snr = str_pad($beacon['snr'], 5, " ", STR_PAD_LEFT);
         $noise = str_pad(number_format((float) ($beacon['rssi'] - $beacon['snr']),1),6,  " ", STR_PAD_LEFT);
