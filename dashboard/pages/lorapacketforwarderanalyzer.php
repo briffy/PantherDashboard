@@ -363,7 +363,7 @@ function generateStats($packets) {
         <th></th>
         <th></th>
         <th></th>
-        <th> All Packets </th>
+        <th> RX Packets </th>
         <th></th>
         <th></th>
         </tr>";
