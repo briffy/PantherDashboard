@@ -240,10 +240,7 @@ function extractData($logsFolder, $startDate, $endDate) {
         unset($buf);
 
         foreach ($lines as $line) {
-
-            if (preg_match('/miner_onion_server_light:decrypt:{[0-9]+,[0-9]+} (?:re-)?sending witness at RSSI/', $line) ||
-               (preg_match('/@miner_poc_grpc_client_statem:send_report:{[0-9]+,[0-9]+} failed to submit report/', $line)))
-            {
+            if (preg_match('/received possible PoC payload/', $line)) {
                 $fields = explode(' ', $line);
                 $datetime = $fields[0] . " " . $fields[1];
                 if ($datetime<$startDate || $datetime>$endDate) {
@@ -254,30 +251,26 @@ function extractData($logsFolder, $startDate, $endDate) {
                 continue;
             }
 
-            if (preg_match('/sending witness at RSSI/', $line)) {
-                $rssi = substr($fields[9], 0, -1);
-                $freq = substr($fields[11], 0, -1);
-                $snr = $fields[13];
-                $status = "successfully sent";
-                $beacons[$rssi.$freq.$snr] = array_merge((array)@$beacons[$rssi.$freq.$snr], compact('datetime', 'rssi', 'freq', 'snr', 'status'));
-                continue;
+            // rssi, freq, snr order in the data
+            $rssi = ""; $freq = ""; $snr = "";
+            $i = 0;
+            foreach ($fields as $val) {
+                $i++;
+                if ($val == "signal_strength:") {
+                    $rssi = str_replace(",", "", $fields[$i]);
+                } elseif ($val == "frequency:") {
+                    $freq = str_replace(",", "", $fields[$i]);
+                } elseif ($val == "snr:") {
+                    $snr = str_replace(",", "", $fields[$i]);
+                    break;
+                }
             }
-
-            if (preg_match('/failed to submit report/', $line)) {
-                $temp = explode('<<',$fields[13]);
-                $temp1 = explode("," , $temp[1]);
-                $temp3 = explode("," , $temp[3]);
-
-                $rssi = $temp1[sizeof($temp1)-2];
-                $freq = $temp3[2];
-                $snr = $temp3[1];
-                $status = "failed";
-                $beacons[$rssi.$freq.$snr] = array_merge((array)@$beacons[$rssi.$freq.$snr], compact('datetime', 'rssi', 'freq', 'snr', 'status'));
-                continue;
-            }
+            $status = "successfully sent";
+            $beacons[$rssi.$freq.$snr] = array_merge((array)@$beacons[$rssi.$freq.$snr], compact('datetime', 'rssi', 'freq', 'snr', 'status'));
+            continue;
         }
     }
-    //
+
     foreach ($beacons as $session => $beacon) {
         if (empty(@$beacon['rssi'])) {
            unset($beacons[$session]);
