@@ -46,6 +46,13 @@ echo 1193f56 > /var/dashboard/commit-hash
 
 ## Change Log ##
 
+- 0.2.27
+1. Update hotspot online status check
+2. Fix time display for Helium Miner Log Analyzer
+3. Rename All Packets to RX Packets in LoRa Packet Forwarder Analyzer
+4. Fix no witness in witness logs and miner log analyzer
+5. Fix no witness in lora packet forwarder analyzer
+
 - 0.2.26
 1. Add network server detection
 2. Fix some AU devices no reward issue
