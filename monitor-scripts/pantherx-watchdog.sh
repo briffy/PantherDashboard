@@ -236,7 +236,7 @@ if [ $retval -ne 0 ]; then
     chmod +x /usr/bin/lora_pkt_fwd_start.sh
 fi
 
-new_region=`docker exec helium-miner miner info region | tr a-z A-Z | tr -d '\r\n'`
+new_region=`docker exec helium-miner helium_gateway info region | jq '.region' | sed 's/"//g' | tr -d '\r\n'`
 if [ ! -z $new_region ] && [ "$new_region" != "UNDEFINED" ]; then
     if [ ! -f "/opt/panther-x2/data/region_onchain" ]; then
         echo -n $new_region > /opt/panther-x2/data/region_onchain

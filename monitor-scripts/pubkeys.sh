@@ -1,15 +1,15 @@
 #!/bin/bash
 
-data=$(sudo docker exec helium-miner miner print_keys)
+data=$(sudo docker exec helium-miner helium_gateway key info)
 
-if [[ $data =~ animal_name,\"([^\"]*) ]]; then
-  match="${BASH_REMATCH[1]}"
+if [[ $data =~ name([^\"]*) ]]; then
+  match=`echo $data | jq '.name' | sed 's/"//g'`
 fi
 
 echo "${match//-/ }" > /var/dashboard/statuses/animal_name
 
-if [[ $data =~ pubkey,\"([^\"]*) ]]; then
-  match="${BASH_REMATCH[1]}"
+if [[ $data =~ key([^\"]*) ]]; then
+  match=`echo $data | jq '.key' | sed 's/"//g'`
 fi
 
 echo $match > /var/dashboard/statuses/pubkey
