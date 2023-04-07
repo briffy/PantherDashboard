@@ -30,13 +30,6 @@ if [ $retval -ne 0 ]; then
     systemctl daemon-reload
     systemctl restart connman
 fi
-
-## Fix missing data folder for miner
-grep "/opt/miner_data/log" /etc/cron.hourly/helium-miner-status
-retval=$?
-if [ $retval -ne 0 ]; then
-sed -i 's/rm -rf \/opt\/miner_data\/\*$/rm -rf \/opt\/miner_data\/*;mkdir -p \/opt\/miner_data\/log/g' /etc/cron.hourly/helium-miner-status
-fi
 fi
 
 # Patches for Panther X2
@@ -78,12 +71,8 @@ if [ $retval -ne 0 ]; then
     systemctl restart connman
 fi
 
-## Fix missing data folder for miner
-grep "/opt/panther-x2/miner_data/log" /etc/cron.hourly/helium-miner-status
-retval=$?
-if [ $retval -ne 0 ]; then
-sed -i 's/rm -rf \/opt\/panther-x2\/miner_data\/\*$/rm -rf \/opt\/panther-x2\/miner_data\/*;mkdir -p \/opt\/panther-x2\/miner_data\/log/g' /etc/cron.hourly/helium-miner-status
-fi
+# Check helium-miner-status
+[ -f /etc/cron.hourly/helium-miner-status ] && rm -f /etc/cron.hourly/helium-miner-status
 
 ## Update and detected LoRa AS923_1B
 echo "94b7cfc3665d3b6f1842c9845ca5b1d1  /etc/global_conf.json.sx1250.AS923_1B.template" | md5sum -c
