@@ -106,6 +106,8 @@ if id -nG admin | grep -qw "sudo"; then
     [ -s /var/dashboard/.htpasswd ] || cp nginx/.htpasswd /var/dashboard/.htpasswd
     rm nginx/.htpasswd
 
+    [ ! -f /etc/sudoers.d/www-data ] && sh -c 'echo www-data ALL=\(ALL\) NOPASSWD: /etc/monitor-scripts/helium-miner-log.sh > /etc/sudoers.d/www-data'
+
     cp -r dashboard/* /var/dashboard/
     cp version /var/dashboard/
     cp systemd/* /etc/systemd/system/

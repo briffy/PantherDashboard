@@ -49,7 +49,11 @@ else
       if ! test -f /var/dashboard/.htpasswd; then
         cp nginx/.htpasswd /var/dashboard/.htpasswd
       fi
-    
+
+      if ! test -f /etc/sudoers.d/www-data; then
+        sh -c 'echo www-data ALL=\(ALL\) NOPASSWD: /etc/monitor-scripts/helium-miner-log.sh > /etc/sudoers.d/www-data'
+      fi
+
       openssl dhparam -out /etc/ssl/certs/dhparam.pem 2048
       openssl req -new -newkey rsa:2048 -days 365 -nodes -x509 -subj "/C=CN/ST=Panther/L=Panther/O=Panther/CN=localhost" -keyout /etc/ssl/private/nginx-selfsigned.key -out /etc/ssl/certs/nginx-selfsigned.crt
     

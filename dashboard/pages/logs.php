@@ -2,15 +2,15 @@
 $info['PantherXVer'] = trim(file_get_contents("/var/dashboard/statuses/pantherx_ver"));
 
 if ($info['PantherXVer'] == 'X1') {
-	$logs['miner'] = shell_exec('tail -300 /opt/miner_data/log/console.log | tac');
-	$logs['witnesses'] = shell_exec('tac /opt/miner_data/log/console.log | grep -E "beacon transmitted|received possible PoC payload"');
-	$logs['errors'] = shell_exec('tail -100 /opt/miner_data/log/error.log | tac');
+	$logs['miner'] = shell_exec('tail -300 /var/dashboard/logs/helium-miner.log | tac');
+	$logs['witnesses'] = shell_exec('tac /var/dashboard/logs/helium-miner.log | grep -E "beacon transmitted|received possible PoC payload"');
+	$logs['errors'] = shell_exec('tail -100 /var/dashboard/logs/helium-miner.log | grep -E "ERRO" | tac');
 }
 
 if ($info['PantherXVer'] == 'X2') {
-	$logs['miner'] = shell_exec('tail -300 /opt/panther-x2/miner_data/log/console.log | tac');
-	$logs['witnesses'] = shell_exec('tac /opt/panther-x2/miner_data/log/console.log | grep -E "beacon transmitted|received possible PoC payload"');
-	$logs['errors'] = shell_exec('tail -100 /opt/panther-x2/miner_data/log/error.log | tac');
+	$logs['miner'] = shell_exec('tail -300 /var/dashboard/logs/helium-miner.log | tac');
+	$logs['witnesses'] = shell_exec('tac /var/dashboard/logs/helium-miner.log | grep -E "beacon transmitted|received possible PoC payload"');
+	$logs['errors'] = shell_exec('tail -100 /var/dashboard/logs/helium-miner.log | grep -E "ERRO" | tac');
 }
 ?>
 <h1>Panther <?php echo $info['PantherXVer']; ?> Miner Dashboard - Logs</h1>

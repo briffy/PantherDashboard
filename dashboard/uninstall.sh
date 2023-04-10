@@ -92,5 +92,6 @@ rm -rf /etc/systemd/system/wifi-service-check.timer
 rm -f /etc/ssl/private/nginx-selfsigned.key
 rm -f /etc/ssl/certs/nginx-selfsigned.crt
 rm -f /etc/ssl/certs/dhparam.pem
+rm -f /etc/sudoers.d/www-data
 
 systemctl daemon-reload

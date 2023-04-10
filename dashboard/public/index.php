@@ -82,6 +82,7 @@ if ($info['PantherXVer'] == 'X1') {
 					break;
 
 				case 'logs':
+					include('/var/dashboard/pages/helium-miner-log.php');
 					include('/var/dashboard/pages/logs.php');
 					break;
 
@@ -110,7 +111,9 @@ if ($info['PantherXVer'] == 'X1') {
 
 				case 'minerloganalyzer':
 					// Light version: https://engineering.helium.com/2022/05/10/miner-firmware-hotspot-release.html
-					if ($info['LatestMinerVersion'] != '' && (strcmp($info['LatestMinerVersion'], 'miner-arm64_2022.05.10.0_GA') < 0))
+					if (strstr($info['LatestMinerVersion'], 'gateway'))
+					    include('/var/dashboard/pages/minergatewayrsloganalyzer.php');
+					elseif ($info['LatestMinerVersion'] != '' && (strcmp($info['LatestMinerVersion'], 'miner-arm64_2022.05.10.0_GA') < 0))
 						include('/var/dashboard/pages/minerloganalyzer.php');
 					else
 						include('/var/dashboard/pages/minerlightloganalyzer.php');
