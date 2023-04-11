@@ -217,6 +217,17 @@ if [ $retval -ne 0 ]; then
     wget https://raw.githubusercontent.com/Panther-X/packet_forwarder/master/lora_pkt_fwd/global_conf.json.sx1257.US915.template -O /etc/global_conf.json.sx1257.US915.template
 fi
 
+## Update gateway-config to adapt to the gateway-rs release
+echo "f5209cec8a5eae914ff424884edd2d0e  /opt/panther-x2/gateway_config/bin/gateway_config" | md5sum -c
+retval=$?
+if [ $retval -ne 0 ]; then
+    systemctl stop gateway-config.service
+    rm -fr /opt/panther-x2/gateway_config
+    wget https://raw.githubusercontent.com/Panther-X/panther_x2_release/master/2023-04-10/gateway-config.tar.gz -O /tmp/gateway-config.tar.gz
+    tar -zxvf /tmp/gateway-config.tar.gz -C /opt/panther-x2/
+    systemctl start gateway-config.service
+fi
+
 ## Detected region change
 echo "8834b9f6b8c2e1a1735f19b78821bb25  /usr/bin/lora_pkt_fwd_start.sh" | md5sum -c
 retval=$?
