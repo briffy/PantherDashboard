@@ -111,7 +111,7 @@ function generateStats($beacons) {
     if (empty($beacons)) {
         return '<br><br><br><h2>No witnesses found</h2>';
     }
-    echo $beacons[0]['datetime'];
+
     $startTime = DateTime::createFromFormat('Y-m-d H:i:s',explode('.',$beacons[0]['datetime'])[0]);
     $endTime = DateTime::createFromFormat('Y-m-d H:i:s',explode('.',end($beacons)['datetime'])[0]);
     $intervalInHours = ($endTime->getTimestamp() - $startTime->getTimestamp())/3600;
