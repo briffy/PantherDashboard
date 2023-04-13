@@ -16,7 +16,7 @@ if [[ $service == 'enabled' ]]; then
     bash /etc/monitor-scripts/dashboard-update.sh
   fi
 
-  if [[ $miner_version ]] && [[ $latest_miner_version ]]; then
+  if [[ $latest_miner_version ]]; then
     if [[ $miner_version != $latest_miner_version ]]; then
       echo "[$(date)] Miner is out of date, trying a miner update..." >> /var/dashboard/logs/auto-update.log
       echo 'start' > /var/dashboard/services/miner-update
