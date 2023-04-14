@@ -21,7 +21,7 @@ else
       wget https://codeload.github.com/Panther-X/PantherDashboard/tar.gz/refs/tags/${VER} -O /tmp/latest.tar.gz
     fi
     cd /tmp
-    if test -f latest.tar.gz; then
+    if test -s latest.tar.gz; then
       rm -rf /tmp/PantherDashboard-*
     
       tar -xzf latest.tar.gz

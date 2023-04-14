@@ -21,7 +21,7 @@ if id -nG admin | grep -qw "sudo"; then
     wget --no-cache https://codeload.github.com/Panther-X/PantherDashboard/tar.gz/refs/tags/${VER} -O /tmp/latest.tar.gz
   fi
   cd /tmp
-  if test -f latest.tar.gz; then
+  if test -s latest.tar.gz; then
     echo 'Extracting contents...' >> /var/dashboard/logs/dashboard-update.log
     tar -xzf latest.tar.gz
     cd PantherDashboard-${VER}
