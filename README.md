@@ -46,6 +46,9 @@ echo 1193f56 > /var/dashboard/commit-hash
 
 ## Change Log ##
 
+- 0.2.29
+1. Fixed miner version update issue
+
 - 0.2.28
 1. Update helium erlang miner to gateway-rs
 2. Add LoRa AU915_SB1, AU915_SB2 and AS923_1C region support
