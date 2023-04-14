@@ -43,7 +43,8 @@ if [[ $service == 'start' ]]; then
             cp -f /tmp/settings.toml /root/helium/overlay/settings.toml
         fi
     fi
-    docker run -d --init --restart always --network host --env GW_KEYPAIR=ecc://i2c-1:96?slot=0 --env GW_LISTEN=127.0.0.1:1680 --device /dev/i2c-1 --privileged -v /etc/timezone:/etc/timezone:ro -v /etc/localtime:/etc/localtime:ro --name helium-miner --mount type=bind,source=/root/helium/overlay/settings.toml,target=/etc/helium_gateway/settings.toml quay.io/team-helium/miner:$version >> /var/dashboard/logs/$name.log
+
+    docker run -d --init --restart always --env GW_KEYPAIR=ecc://i2c-1:96?slot=0 --env GW_API=0.0.0.0:4467 --publish 127.0.0.1:1680:1680/udp --publish 127.0.0.1:4467:4467/tcp --device /dev/i2c-1 --privileged -v /etc/timezone:/etc/timezone:ro -v /etc/localtime:/etc/localtime:ro --name helium-miner --mount type=bind,source=/root/helium/overlay/settings.toml,target=/etc/helium_gateway/settings.toml quay.io/team-helium/miner:$version >> /var/dashboard/logs/$name.log
 
     currentdockerstatus=$(sudo docker ps -a -f name=helium-miner --format "{{ .Status }}")
     if [[ $currentdockerstatus =~ 'Up' ]]; then
