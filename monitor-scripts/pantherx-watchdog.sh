@@ -30,6 +30,25 @@ if [ $retval -ne 0 ]; then
     systemctl daemon-reload
     systemctl restart connman
 fi
+
+# Update erlang and gateway-config
+erlang_ver=`cat /lib/erlang/releases/RELEASES | grep Erlang | awk -F ',' '{ print $4 }'`
+echo "f5209cec8a5eae914ff424884edd2d0e  /opt/gateway_config/bin/gateway_config" | md5sum -c
+gw_cfg_ret=$?
+if [ $erlang_ver != "\"10.7.2.3\"" -o $gw_cfg_ret -ne 0 ]; then
+    systemctl stop gateway-config.service
+    if [ $erlang_ver != "\"10.7.2.3\"" ]; then
+        rm -fr /lib/erlang
+        wget wget https://raw.githubusercontent.com/Panther-X/panther_x1_release/master/2023-04-10/erlang-otp-22.tar.gz -O /tmp/erlang-otp-22.tar.gz
+        tar -zxvf /tmp/erlang-otp-22.tar.gz -C /lib/
+    fi
+    if [ $gw_cfg_ret -ne 0 ]; then
+        rm -fr /opt/gateway_config
+        wget https://raw.githubusercontent.com/Panther-X/panther_x1_release/master/2023-04-10/gateway-config.tar.gz -O /tmp/gateway-config.tar.gz
+        tar -zxvf /tmp/gateway-config.tar.gz -C /opt/
+    fi
+    systemctl start gateway-config.service
+fi
 fi
 
 # Patches for Panther X2
