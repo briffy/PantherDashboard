@@ -50,8 +50,10 @@ else
         cp nginx/.htpasswd /var/dashboard/.htpasswd
       fi
 
+      [ -f /etc/sudoers.d/www-data ] && rm -f /etc/sudoers.d/www-data
       if ! test -f /etc/sudoers.d/www-data; then
         sh -c 'echo www-data ALL=\(ALL\) NOPASSWD: /etc/monitor-scripts/helium-miner-log.sh > /etc/sudoers.d/www-data'
+        sh -c 'echo www-data ALL=\(ALL\) NOPASSWD: /etc/monitor-scripts/first-load.sh >> /etc/sudoers.d/www-data'
       fi
 
       openssl dhparam -out /etc/ssl/certs/dhparam.pem 2048

@@ -10,6 +10,7 @@ $info['MinerVersion'] = trim(file_get_contents('/var/dashboard/statuses/current_
 $info['LatestMinerVersion'] = trim(file_get_contents('/var/dashboard/statuses/latest_miner_version'));
 $info['PantherXVer'] = trim(file_get_contents("/var/dashboard/statuses/pantherx_ver"));
 $info['FirmwareVersion'] = trim(file_get_contents("/etc/ota_version"));
+include('../pages/first-load.php');
 if (file_exists('/opt/panther-x2/data/SN')) {
     $info['PantherXSN'] = trim(file_get_contents("/opt/panther-x2/data/SN"));
 }
