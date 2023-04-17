@@ -240,7 +240,7 @@ function extractData($logsFolder, $startDate, $endDate) {
         unset($buf);
 
         foreach ($lines as $line) {
-            if (preg_match('/received possible PoC payload/', $line)) {
+            if (preg_match('/received potential beacon/', $line)) {
                 $fields = explode(' ', $line);
                 $datetime = str_replace("Z","",str_replace("T"," ",$fields[0]));
                 if ($datetime<$startDate || $datetime>$endDate) {
@@ -256,12 +256,12 @@ function extractData($logsFolder, $startDate, $endDate) {
             $i = 0;
             foreach ($fields as $val) {
                 $i++;
-                if ($val == "rssi:") {
-                    $rssi = str_replace(",", "", $fields[$i]);
-                } elseif ($val == "frequency:") {
-                    $freq = str_replace(",", "", $fields[$i]);
+                if ($val == "us,") {
+                    $freq = number_format($fields[$i]/1000000,1,'.','');
                 } elseif ($val == "snr:") {
                     $snr = str_replace(",", "", $fields[$i]);
+                } elseif ($val == "rssi:") {
+                    $rssi = str_replace(",", "", $fields[$i]);
                     break;
                 }
             }
