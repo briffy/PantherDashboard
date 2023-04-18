@@ -33,13 +33,6 @@ $info['PantherXVer'] = trim(file_get_contents("/var/dashboard/statuses/pantherx_
 			</a>
 		</li>
 
-		<li id="clear_blockchain_button">
-			<a href="#" onclick="ClearBlockChainPrompt();" title="Clear BlockChain Data">
-				<span class="icon-warning"></span>
-				<span class="button_title">Clear BlockChain Data</span>
-			</a>
-		</li>
-
 		<li id="set_timezone_button">
 			<a href="#" onclick="SetTimezonePrompt();" title="Set Timezone">
 				<span class="icon-time"></span>

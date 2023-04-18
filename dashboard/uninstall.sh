@@ -42,8 +42,8 @@ rm -rf /etc/systemd/system/bt-check.timer
 rm -rf /etc/systemd/system/bt-check.service
 rm -rf /etc/systemd/system/bt-service-check.service
 rm -rf /etc/systemd/system/bt-service-check.timer
-rm -rf /etc/systemd/system/clear-blockchain-check.timer
-rm -rf /etc/systemd/system/clear-blockchain-check.service
+[ -f /etc/systemd/system/clear-blockchain-check.timer ] && rm -rf /etc/systemd/system/clear-blockchain-check.timer
+[ -f /etc/systemd/system/clear-blockchain-check.service ] && rm -rf /etc/systemd/system/clear-blockchain-check.service
 rm -rf /etc/systemd/system/cpu-check.timer
 rm -rf /etc/systemd/system/cpu-check.service
 rm -rf /etc/systemd/system/external-ip-check.service

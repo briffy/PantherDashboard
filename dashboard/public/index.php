@@ -106,10 +106,6 @@ if ($info['PantherXVer'] == 'X1') {
 					include('/var/dashboard/pages/updatedashboard.php');
 					break;
 
-				case 'clearblockchain':
-					include('/var/dashboard/pages/clearblockchain.php');
-					break;
-
 				case 'minerloganalyzer':
 					// Light version: https://engineering.helium.com/2022/05/10/miner-firmware-hotspot-release.html
 					if (strstr($info['LatestMinerVersion'], 'gateway'))

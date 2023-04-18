@@ -21,13 +21,6 @@ if [[ $service == 'enabled' ]]; then
       sleep 1m
       current_docker_status=$(sudo docker ps -a -f name=helium-miner --format "{{ .Status }}")
       uptime=$(sudo docker ps -a -f name=helium-miner --format "{{ .Status }}" | grep -Po "Up [0-9]* seconds" | sed 's/ seconds//' | sed 's/Up //')
-
-      if [[ ! $current_docker_status =~ 'Up' || $uptime != '' && $uptime -le 55 ]]; then
-        echo "[$(date)] STILL problems with docker, trying a blockchain clear..." >> /var/dashboard/logs/auto-maintain.log
-        echo 'start' > /var/dashboard/services/clear-blockchain
-        bash /etc/monitor-scripts/clear-blockchain.sh
-        sleep 1m
-      fi
     fi
   fi
 

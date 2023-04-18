@@ -11,10 +11,6 @@ if(isset($_GET['name']))
 			echo file_get_contents('/var/dashboard/logs/dashboard-update.log');
 			break;
 
-		case 'clear-blockchain':
-			echo file_get_contents('/var/dashboard/logs/clear-blockchain.log');
-			break;
-
 		case 'server-detection':
 			echo file_get_contents('/var/dashboard/logs/server-detection.log');
 			break;

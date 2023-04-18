@@ -34,6 +34,8 @@ if id -nG admin | grep -qw "sudo"; then
     fi
     apt-get --assume-yes install nginx php-fpm php7.3-fpm ngrep gawk php-cli logrotate netcat jq
 
+    [ -f /etc/monitor-scripts/clear-blockchain.sh ] && rm -f /etc/monitor-scripts/clear-blockchain.sh
+
     mkdir -p /var/dashboard
     mkdir -p /var/dashboard/logs
     mkdir -p /etc/monitor-scripts
@@ -83,6 +85,13 @@ if id -nG admin | grep -qw "sudo"; then
       systemctl disable peer-list-check.service
       rm -rf /etc/systemd/system/peer-list-check.timer
       rm -rf /etc/systemd/system/peer-list-check.service
+    fi
+
+    if test -f /etc/systemd/system/clear-blockchain-check.timer; then
+      systemctl disable clear-blockchain-check.timer
+      systemctl disable clear-blockchain-check.service
+      rm -rf /etc/systemd/system/clear-blockchain-check.timer
+      rm -rf /etc/systemd/system/clear-blockchain-check.service
     fi
 
     # Remove /etc/ssl/certs/dhparam.pem if it is empty and regenerate it
