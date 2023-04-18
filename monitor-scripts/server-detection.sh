@@ -19,24 +19,8 @@ function check_dashboard_server_status() {
     return 1
 }
 
-function check_validator_status() {
-    for ((i=0; i<3; i++)); do
-        local ret_code=`curl -I -s --connect-timeout 5 https://api.helium.io/v1/validators/elected -H 'user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.75 Safari/537.36' -w %{http_code} | tail -n1`
-        if [[ "x$ret_code" = "x200" ]]; then
-            for grpc_addr in `curl -s https://api.helium.io/v1/validators/elected -H 'user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.75 Safari/537.36' | jq .data[].status.grpc_addr`; do
-                ip=$(echo ${grpc_addr} | sed 's/http:\/\///' | sed 's/"//' | sed 's/:/ /' | awk '{print $1}');
-                port=$(echo ${grpc_addr} | sed 's/"//' | sed 's/"//' | sed 's/http:\/\///' | sed 's/:/ /' | awk '{print $2}');
-                nc -z -w 2 $ip $port
-                if [[ $? == 0 ]]; then
-                    echo "Validator can be connected." >> /var/dashboard/logs/$name.log
-                    return 0
-                fi
-            done
-        fi
-    done
-
-    echo "Validator can't be connected, please check your local network configuration." >> /var/dashboard/logs/$name.log
-    return 1
+function check_miner_server_status(){
+    /usr/bin/php /var/dashboard/pages/minerserverstatus.php >> /var/dashboard/logs/$name.log
 }
 
 # Fix invalid status when boot finish
@@ -51,7 +35,7 @@ if [[ $service == 'start' ]]; then
     echo 'running' > /var/dashboard/services/$name
     echo 'Running Server Detection' > /var/dashboard/logs/$name.log
     check_dashboard_server_status https://raw.githubusercontent.com/Panther-X/PantherDashboard/main/install.sh Dashboard-Server
-    check_validator_status
+    check_miner_server_status
     echo 'stopped' > /var/dashboard/services/$name
     echo 'Server Detection complete.' >> /var/dashboard/logs/$name.log
 fi
