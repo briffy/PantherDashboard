@@ -31,6 +31,15 @@ $sync = '<li><p style="color:#2BFF97">Fully Synced</p></li><br />';
 <link rel="stylesheet" href="css/hack.css" />
 <script src="js/jquery-2.1.4.min.js"></script>
 <script src="js/functions.js"></script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8NGJ6M5PSV"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-8NGJ6M5PSV');
+</script>
 <?php
 if ($info['PantherXVer'] == 'X1') {
     echo '<link rel="shortcut icon" href="favicon-x1.ico" type="image/x-icon" />';
