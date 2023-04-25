@@ -214,14 +214,11 @@ function ClosePrompt()
 }
 
 $(document).ready(function(){
-	$("#live_height").text("Loading");
 	$("#online_status").text("Loading");
 	$.get("HeliumStatus.php",function(data){
-		$("#live_height").text(data.live_height);
 		$("#online_status").text(data.online_status);
 	}).error(function(){
 		$("#online_status").text("Maintenance");
-		$("#live_height").text("Maintenance");
 	})
 })
 

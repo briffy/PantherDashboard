@@ -142,7 +142,6 @@ if ($info['PantherXVer'] == 'X1') {
 				<h3>BlockChain Info</h3>
 				<ul id="info_height_data">
 					<?php echo $sync ?>
-					<li>Live Height: <span id="live_height">Loading</span></li>
 					<li>Online Status: <span id="online_status">Loading</span></li>
 				</ul>
 			</div>

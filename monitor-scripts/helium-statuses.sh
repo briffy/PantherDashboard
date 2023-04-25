@@ -1,16 +1,12 @@
 #!/bin/bash
-pubkey=$(cat /var/dashboard/statuses/pubkey | tr -d "\n")
-root_uri='https://api.helium.io/v1/hotspots/'
-uri="$root_uri$pubkey"
-
-if [[ $pubkey ]]; then
-  if data=$(wget -U "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36" $uri -qO-); then
-    online_status=$(echo $data | grep -Po '"online":".*?[^\\]"' | sed -e 's/^"online"://' | tr -d '"')
-    echo $online_status > /var/dashboard/statuses/online_status
-  fi
+if [ -s /var/dashboard/logs/helium-miner.log ]; then
+    beacon_count=`cat /var/dashboard/logs/helium-miner.log | grep "beacon transmitted" | wc -l`;
+    echo $beacon_count;
+    if [ $beacon_count -gt 0 ]; then
+        echo "online" > /var/dashboard/statuses/online_status
+    else
+        echo 'unknown' > /var/dashboard/statuses/online_status
+    fi
 else
-  echo 'unknown' > /var/dashboard/statuses/online_status
+    echo 'unknown' > /var/dashboard/statuses/online_status
 fi
-
-height=$(wget -U "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36" 'https://api.helium.io/v1/blocks/height' -qO- | grep -Po '"height":[^}]+' | sed -e 's/^"height"://')
-echo $height > /var/dashboard/statuses/current_blockheight
