@@ -46,6 +46,13 @@ echo 1193f56 > /var/dashboard/commit-hash
 
 ## Change Log ##
 
+- 0.2.30
+1. Fix online status display issue
+2. Fix pubkey display issue
+3. Fix no witness in miner log analyzer
+4. Update helium server detection
+5. Remove invalid clear blockchain tool
+
 - 0.2.29
 1. Fixed miner version update issue
 
