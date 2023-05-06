@@ -1,5 +1,8 @@
 #!/bin/bash
 
+pubkey=`cat /var/dashboard/statuses/pubkey`
+[ "$pubkey" != "" ] && exit
+
 data=$(sudo docker exec helium-miner helium_gateway key info)
 
 if [[ $data =~ name([^\"]*) ]]; then
