@@ -23,4 +23,12 @@ if [[ $service == 'enabled' ]]; then
       bash /etc/monitor-scripts/miner-update.sh
     fi
   fi
+
+  # Check and update gateway-rs configuration file
+  echo "bfa7d6eaae706a2342ea2155d9ea3a8a  /root/helium/overlay/settings.toml" | md5sum -c
+  retval=$?
+  if [[ $retval -ne 0 ]]; then
+    cp -f /var/dashboard/config/settings.toml /root/helium/overlay/settings.toml
+    docker restart helium-miner
+  fi
 fi

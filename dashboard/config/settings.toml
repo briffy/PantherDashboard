@@ -14,14 +14,17 @@ keypair = "/etc/helium_gateway/gateway_key.bin"
 # The address to listen on for the (semtech) packet forwarder
 listen = "127.0.0.1:1680"
 
-# The local port to serve the local grpc on. 
-# Do NOT expose this port outside of the host network for security
+# The local port to serve the local grpc on. Supports both a simple port number
+# or full ip:port listen address. Do NOT expose this port outside of the host
+# network for security
 api = 4467
 
 # The default region to use until a region is received from the Helium network.
 # This value should line up with the configured region of the semtech packet
-# forwarder. 
-region = "US915"
+# forwarder. Note: Not setting this here or with a GW_REGION env var will stop
+# packet and poc beaconing until the correct asserted region is retrieved. 
+#
+# region = "US915"
 
 [log]
 # The logging level to assume on startup
@@ -46,5 +49,5 @@ uri = "http://mainnet-config.helium.io:6080/"
 [router]
 uri = "http://mainnet-router.helium.io:8080/"
 # Maximum number of packets to queue up for the packet router
-queue = 20
+queue = 1
 

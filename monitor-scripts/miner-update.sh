@@ -32,17 +32,7 @@ if [[ $service == 'start' ]]; then
     docker image pull quay.io/team-helium/miner:$version >> /var/dashboard/logs/$name.log
     mkdir -p ${miner_data_path}/log
 
-    ## Check settings.toml
     [ ! -f /root/helium/overlay/settings.toml ] && cp -f /var/dashboard/config/settings.toml /root/helium/overlay/settings.toml
-    echo "cffe674e7c85aea1730e13f15d056f27  /root/helium/overlay/settings.toml" | md5sum -c
-    retval=$?
-    if [[ $retval -ne 0 ]]; then
-        wget https://raw.githubusercontent.com/Panther-X/PantherDashboard/main/dashboard/config/settings.toml -O /tmp/settings.toml
-        echo "cffe674e7c85aea1730e13f15d056f27  /tmp/settings.toml" | md5sum -c
-        if [[ \$? -eq 0 ]]; then
-            cp -f /tmp/settings.toml /root/helium/overlay/settings.toml
-        fi
-    fi
 
     docker run -d --init --restart always --env GW_KEYPAIR=ecc://i2c-1:96?slot=0 --env GW_API=0.0.0.0:4467 --publish 127.0.0.1:1680:1680/udp --publish 127.0.0.1:4467:4467/tcp --device /dev/i2c-1 --privileged -v /etc/timezone:/etc/timezone:ro -v /etc/localtime:/etc/localtime:ro --name helium-miner --mount type=bind,source=/root/helium/overlay/settings.toml,target=/etc/helium_gateway/settings.toml quay.io/team-helium/miner:$version >> /var/dashboard/logs/$name.log
 
