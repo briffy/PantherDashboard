@@ -294,7 +294,7 @@ if [ $retval -ne 0 ]; then
 fi
 
 new_region=`docker exec helium-miner helium_gateway info region | jq '.region' | sed 's/"//g' | tr -d '\r\n'`
-if [ ! -z $new_region ] && [ "$new_region" != "UNDEFINED" ]; then
+if [ ! -z $new_region ] && [ "$new_region" != "null" ]; then
     if [ ! -f "/opt/panther-x2/data/region_onchain" ]; then
         echo -n $new_region > /opt/panther-x2/data/region_onchain
         local_region=`/usr/bin/region_uptd`
