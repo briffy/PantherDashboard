@@ -54,7 +54,7 @@ echo 1193f56 > /var/dashboard/commit-hash
 5. Remove invalid clear blockchain tool
 
 - 0.2.29
-1. Fixed miner version update issue
+1. Fix miner version update issue
 
 - 0.2.28
 1. Update helium erlang miner to gateway-rs
@@ -81,7 +81,7 @@ echo 1193f56 > /var/dashboard/commit-hash
 - 0.2.24
 1. Remove peer list in info page, because it is useless any more
 2. Update miner's timezone when we change the timezone in the Dashboard
-3. Fixed an issue that the latest stable miner could not be detected
+3. Fix an issue that the latest stable miner could not be detected
 
 - 0.2.23
 1. Remove display for miner's local height
@@ -103,7 +103,7 @@ echo 1193f56 > /var/dashboard/commit-hash
 3. Fix corrupted files during update 
 
 - 0.2.19
-1. Fixed website icon for Panther X2
+1. Fix website icon for Panther X2
 2. Add timezone set support
 3. Add current timezone display in the home page
 4. Add witness log display for light hotspot
